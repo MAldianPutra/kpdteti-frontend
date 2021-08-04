@@ -1,10 +1,19 @@
 <template>
-  <div></div>
+  <v-content>
+    <main-appbar></main-appbar>
+    Author Page
+  </v-content>
+
 </template>
 
 <script>
+import MainAppbar from '@/components/MainAppbar'
+
 export default {
-  name: "AuthorProfilePage"
+  name: "AuthorProfilePage",
+  components: {
+    MainAppbar,
+  }
 }
 </script>
 

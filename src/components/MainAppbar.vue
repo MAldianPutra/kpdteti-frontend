@@ -1,12 +1,20 @@
 <template>
   <v-app-bar
       app
-      color="primary"
+      color="#16697A"
       dark
       flat
+      elevate-on-scroll
+      scroll-target="#scrolling-techniques-7"
   >
+    <v-img
+        max-height="30"
+        max-width="30"
+        class="mr-3"
+        :src="require('../img/Asset1.svg')"
+    ></v-img>
     <v-toolbar-title class="text-uppercase secondary--text">
-      <span class="font-weight-medium">KPDTETI</span>
+      kp-dteti
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn
@@ -36,7 +44,11 @@
             :key="index"
             router :to="menu.route"
         >
-          <v-list-item-title>{{ menu.title }}</v-list-item-title>
+          <v-list-item-title>
+            <router-link :to="menu.route">
+              {{ menu.title }}
+            </router-link>
+          </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -45,19 +57,29 @@
 
 <script>
 export default {
-  name: "MainAppbar",
   data() {
     return {
       menus: [
-        { title: 'Projects', route: '?project' },
-        { title: 'Blog', route: '?blog' },
-        { title: 'About', route: '?about' },
+        { title: 'Home', route: '/home' },
+        { title: 'Klasifikasi', route: '/klasifikasi' },
+        { title: 'Publikasi', route: '/publikasi' },
+        { title: 'Author', route: '/author-profile' },
+        { title: 'Akun', route: '/akun' },
+        { title: 'Log Out', route: '/logout' },
       ],
     };
   },
-}
+  methods: {
+    redirectPage() {
+
+    }
+  }
+};
 </script>
 
-<style scoped>
-
+<style>
+  * {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+  }
 </style>

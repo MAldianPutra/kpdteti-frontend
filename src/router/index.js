@@ -11,6 +11,11 @@ const routes = [
         component: Dashboard,
     },
     {
+      path: '/author-profile',
+      name: 'author profile',
+      component: () => import(/* webpackChunkName: "author profile" */'../views/AuthorProfilePage.vue')
+    },
+    {
         path: '/publication',
         name: 'publication',
         // route level code-splitting
