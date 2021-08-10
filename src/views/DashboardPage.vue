@@ -3,11 +3,14 @@
     <main-appbar></main-appbar>
     <div id="heroSection">
       <section>
-        <div style="{backgroundImage: url('~@/assets/jjj.png')}">
-        </div>
-          <h1>Selamat Datang di KP-DTETI!</h1>
-          <p>KP-DTETI adalah sistem klasifikasi hasil publikasi. Sistem ini
+        <v-container class="firstSection">
+          <div style="{backgroundImage: url('~@/assets/jjj.png')}">
+          </div>
+          <h1>Selamat Datang di KP-DTETI!</h1><br>
+          <p>KP-DTETI adalah sistem klasifikasi hasil publikasi.<br>
+            Sistem ini
             dapat digunakan oleh mahasiswa,dosen dan tenaga pendidik DTETI FT UGM.</p>
+          <pre class="tab1"></pre>
           <h2>Untuk Memulai Klasifikasi klik button di bawah ini!</h2>
           <div class="item">
             <v-btn
@@ -17,11 +20,16 @@
             >
               Klasifikasi
             </v-btn>
-        </div>
+          </div>
+        </v-container>
       </section>
     </div>
+<!--    <div id="buttonSection">-->
+<!--      </div>-->
     <div id="topicSection">
+      <pre class="tab2">
       <h1>Cari Hasil Publikasi Berdasarkan Topik</h1>
+      </pre>
         <v-container class="grey lighten-5">
           <v-layout>
             <v-row no-gutters>
@@ -62,10 +70,19 @@
 </script>
 
 <style scoped>
-  .heroSection{
-    margin-top: 50px;
+  .firstSection{
+    background: url('../assets/bakg_research.jpg');
     background-size: cover;
-    height: 200px;
+    height:250%;
+    width: 100%;
+    word-wrap: normal;
   }
 
+  .firstSection>h2{
+    font-size: 30px;
+  }
+
+  .tab1, .tab2{
+    tab-size:2;
+  }
 </style>
