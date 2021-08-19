@@ -11,6 +11,11 @@ const routes = [
         component: Dashboard,
     },
     {
+        path: '/klasifikasi',
+        name: 'klasifikasi publikasi',
+        component: () => import(/*webpackChunkName: "klasifikasi publikasi" */'../views/PostPublicationPage')
+    },
+    {
       path: '/author-profile',
       name: 'author profile',
       component: () => import(/* webpackChunkName: "author profile" */'../views/AuthorProfilePage.vue')
