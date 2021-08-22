@@ -11,6 +11,11 @@ const routes = [
         component: Dashboard,
     },
     {
+        path: '/home',
+        name: 'dashboard',
+        component: Dashboard,
+    },
+{
         path: '/klasifikasi',
         name: 'klasifikasi publikasi',
         component: () => import(/*webpackChunkName: "klasifikasi publikasi" */'../views/PostPublicationPage')
