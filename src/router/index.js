@@ -4,6 +4,7 @@ import Dashboard from '../views/DashboardPage.vue';
 
 Vue.use(VueRouter);
 
+const Klasifikasi= { template:'<p>Klasifikasi!</p>'};
 const routes = [
     {
         path: '/',
@@ -19,6 +20,10 @@ const routes = [
         path: '/klasifikasi',
         name: 'klasifikasi publikasi',
         component: () => import(/*webpackChunkName: "klasifikasi publikasi" */'../views/PostPublicationPage')
+    },
+    {
+        path: '/klasifikasi',
+        component: Klasifikasi
     },
     {
       path: '/author-profile',

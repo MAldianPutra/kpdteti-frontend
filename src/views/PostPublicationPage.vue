@@ -50,12 +50,16 @@
                 label="File input"
             ></v-file-input>
           <v-btn
+              color="teal darken-1"
               class="mr-4"
               @click="submit"
           >
             submit
           </v-btn>
-          <v-btn @click="clear">
+          <v-btn
+              text
+              color="teal darken-1"
+              @click="clear">
             clear
           </v-btn>
         </form>
@@ -79,6 +83,7 @@
                 v-model="e6"
                 vertical>
                   <v-stepper-step
+                      color="amber darken-2"
                     :complete="e6>1"
                     step="1">Pre-Processing</v-stepper-step>
                   <v-stepper-content step="1">
@@ -87,13 +92,15 @@
                     class="mb-12"
                     height="300px"></v-card>
                     <v-btn
-                        color="primary"
+                        class="white--text"
+                        color="teal darken-1"
                         @click="e6 = 2"
                     >
                       Continue
                     </v-btn>
                   </v-stepper-content>
                   <v-stepper-step
+                      color="amber darken-2"
                     :complete="e6>2"
                     step="2">Classification</v-stepper-step>
                   <v-stepper-content step="2">
@@ -102,13 +109,23 @@
                         class="mb-12"
                         height="200px"></v-card>
                     <v-btn
-                        color="primary"
+                        class="white--text"
+                        color="teal darken-1"
                         @click="e6 = 3"
                     >
                       Continue
                     </v-btn>
+                    <v-btn
+                        text
+                        class="white--text"
+                        color="teal darken-1"
+                        @click="e6 = 1"
+                    >
+                      Back
+                    </v-btn>
                   </v-stepper-content>
                   <v-stepper-step
+                      color="amber darken-2"
                       step="3">Result</v-stepper-step>
                     <v-stepper-content step="3">
                       <v-card
@@ -116,10 +133,19 @@
                           class="mb-12"
                           height="200px"></v-card>
                       <v-btn
-                          color="primary"
+                          class="white--text"
+                          color="teal darken-1"
                           @click="e6 = 1"
                       >
                         Continue
+                      </v-btn>
+                      <v-btn
+                          text
+                          class="white--text"
+                          color="teal darken-1"
+                          @click="e6 = 2"
+                      >
+                        Back
                       </v-btn>
                     </v-stepper-content>
           </v-stepper>

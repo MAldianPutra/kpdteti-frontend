@@ -13,13 +13,19 @@
           <pre class="tab1"></pre>
           <h2>Untuk Memulai Klasifikasi klik button di bawah ini!</h2>
           <div class="item">
+
+            <router-link
+            to="/klasifikasi"
+            tag="v-btn">
             <v-btn
                 rounded
-                color="primary"
+                color="teal darken-1"
                 dark
+                elevation="2"
             >
-              Klasifikasi
+             <span>Klasifikasi</span>
             </v-btn>
+            </router-link>
           </div>
         </v-container>
       </section>
