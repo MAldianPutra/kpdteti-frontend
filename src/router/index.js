@@ -4,7 +4,6 @@ import Dashboard from '../views/DashboardPage.vue';
 
 Vue.use(VueRouter);
 
-const Klasifikasi= { template:'<p>Klasifikasi!</p>'};
 const routes = [
     {
         path: '/',
@@ -16,14 +15,10 @@ const routes = [
         name: 'dashboard',
         component: Dashboard,
     },
-{
-        path: '/klasifikasi',
-        name: 'klasifikasi publikasi',
-        component: () => import(/*webpackChunkName: "klasifikasi publikasi" */'../views/PostPublicationPage')
-    },
     {
-        path: '/klasifikasi',
-        component: Klasifikasi
+        path: '/classification',
+        name: 'publication classification',
+        component: () => import(/*webpackChunkName: "publication classification" */'../views/PostPublicationPage')
     },
     {
       path: '/author-profile',
@@ -36,7 +31,7 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/PublicationDetailPage.vue'),
+        component: () => import(/* webpackChunkName: "publication" */ '../views/PublicationDetailPage.vue'),
     },
 ];
 

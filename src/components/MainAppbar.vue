@@ -62,11 +62,11 @@ export default {
     return {
       menus: [
         { title: 'Home', route: '/home' },
-        { title: 'Klasifikasi', route: '/klasifikasi' },
-        { title: 'Publikasi', route: '/publikasi' },
+        { title: 'Classification', route: '/classification' },
+        { title: 'Publication', route: '/publication' },
         { title: 'Author', route: '/author-profile' },
-        { title: 'Akun', route: '/akun' },
-        { title: 'Log Out', route: '/logout' },
+        { title: 'Account', route: '/account' },
+        { title: 'Logout', route: '/logout' },
       ],
     };
   },
