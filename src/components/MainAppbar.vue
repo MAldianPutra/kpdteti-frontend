@@ -2,6 +2,7 @@
   <v-app-bar
       app
       color="#16697A"
+      elevation="3"
       dark
       flat
       elevate-on-scroll
