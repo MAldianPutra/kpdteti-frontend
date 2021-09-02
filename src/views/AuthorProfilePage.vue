@@ -17,27 +17,6 @@
             <div class="text-overline mb-7">
               AUTHOR
             </div>
-            <div class="text-overline mb-1">
-              TOPICS
-            </div>
-            <v-card-actions>
-              <v-row
-                  justify="space-around"
-                  align="center">
-                <v-chip
-                  class="ma-2"
-                  color="warning lighten-2">
-                </v-chip>
-                <v-chip
-                  class="ma-2"
-                  color="warning lighten-2">
-                </v-chip>
-                <v-chip
-                  class="ma-2"
-                  color="warning lighten-2">
-                </v-chip>
-              </v-row>
-            </v-card-actions>
             <v-list-item-title>
             </v-list-item-title>
           </v-list-item-content>

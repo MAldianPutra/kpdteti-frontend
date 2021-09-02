@@ -2,7 +2,7 @@
   <v-app-bar
       app
       color="#16697A"
-      elevation="3"
+      elevation
       dark
       flat
       elevate-on-scroll
@@ -82,5 +82,6 @@ export default {
   * {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
+    font-color: white;
   }
 </style>

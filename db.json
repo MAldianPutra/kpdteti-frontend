@@ -1,0 +1,47 @@
+{
+  "Topics": [
+    {"id": "T-01",
+      "Name": "General and Reference"
+    },
+    {
+      "id": "T-02",
+      "Name": "Hardware"
+    },
+    {
+      "id": "T-03",
+      "Name": "Computer System Organization"
+    },
+    {
+      "id": "T-04",
+      "Name": "Networks"
+    },
+    {
+      "id": "T-05",
+      "Name": "Software and Its Engineering"
+    },
+    {
+      "id": "T-06",
+      "Name": "Information Systems"
+    },
+    {
+      "id": "T-07",
+      "Name": "Security and Privacy"
+    },
+    {
+      "id": "T-08",
+      "Name": "Human-Centered Computing"
+    },
+    {
+      "id": "T-09",
+      "Name": "Computing Methodologies"
+    },
+    {
+      "id": "T-10",
+      "Name": "Applied Computing"
+    },
+    {
+      "id": "T-11",
+      "Name": "Social and Professional Topic"
+    }
+  ]
+}
