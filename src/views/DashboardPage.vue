@@ -32,29 +32,52 @@
         </v-container>
       </section>
     </div>
+<!--    <v-btn @click="menujuHalamanLain()"></v-btn>-->
 <!--    <div id="buttonSection">-->
 <!--      </div>-->
     <div id="topicSection">
-      <pre class="tab2">
+      <pre>
       <h1>Cari Hasil Publikasi Berdasarkan Topik</h1>
       </pre>
-      <v-container class="grey lighten-5">
-        <v-row>
+      <v-container
+          class="grey lighten-5 py-0 my-0">
+        <v-row justify="center">
           <v-col
-             v-for="topic in topics"
-             :key="topic.id"
-          >
+              cols="12"
+              md="4"
+              v-for="topic in Topics"
+              :key="topic.topicParentId">
+           <router-link :to="{name: 'publication topic' }">
             <v-card
                 class="pa-4"
                 outlined
-                rounded
+                rounded-xl
                 color="cyan darken-2"
             >
-              {{Topics.Name}}
-<!--              {{ k }} of {{ n + 2 }}-->
+              {{ topic.topicParentName }}
             </v-card>
+           </router-link>
           </v-col>
         </v-row>
+<!--        <v-row-->
+<!--        v-for="n in 2"-->
+<!--        :key="n">-->
+<!--          <v-col-->
+<!--          v-for="k in 5"-->
+<!--          :key="k">-->
+<!--            <v-card-->
+<!--                class="pa-4"-->
+<!--                outlined-->
+<!--                rounded-->
+<!--                color="cyan darken-2"-->
+<!--                v-for="topic in Topics"-->
+<!--                :key="topic.id"-->
+<!--            >-->
+<!--              {{ topic.Name }}-->
+<!--&lt;!&ndash;              {{ k }} of {{ n + 2 }}&ndash;&gt;-->
+<!--            </v-card>-->
+<!--          </v-col>-->
+<!--        </v-row>-->
       </v-container>
               <!--        <v-container class="grey lighten-5">-->
 <!--          <v-layout>-->
@@ -92,6 +115,7 @@
 <script>
   import MainAppbar from '@/components/MainAppbar.vue';
   import axios from "axios";
+  // import topicData from '@/json/db.json';
 
   export default {
   name: "DashboardPage",
@@ -100,22 +124,32 @@
     },
     data(){
     return{
-      topics: []
+      // Topics: topicData,
+      Topics : []
       }
     },
-    methods: {
-    setTopics(data){
-      this.topics = data
+    methods:{
+    showTopicParent(data){
+      this.Topics=data
       }
-    },mounted() {
+    },
+    mounted(){
       axios
-      .get('http://localhost:3000/Topics')
-          .then(function (response){
-            this.setTopics(response.data);
-          })
-          .catch(function (error) {console.log(error);
-          })
-    }
+      .get("http://localhost:8081/kpdteti/api/parents/all")
+          .then((response) =>
+              // handle success
+              this.showTopicParent(response.data))
+          // this.Topics(response.data))
+          .catch((error) =>
+              // handle error
+              console.log(error))
+
+    },
+    // methods: {
+    //   menujuHalamanLain(id) {
+    //     this.$router.push(`dashboard/detail/${id}`)
+    //   }
+    // }
   };
 </script>
 
@@ -132,7 +166,7 @@
     font-size: 30px;
   }
 
-  .tab1, .tab2{
-    tab-size:2;
+  .tab1{
+    tab-size:1;
   }
 </style>
