@@ -102,21 +102,27 @@
 
                   <v-divider></v-divider>
 
-                  <v-list dense>
-                    <v-list-item
-                        v-for="(key, index) in filteredKeys"
-                        :key="index"
-                    >
-<!--                      <v-list-item-content :class="{ 'blue&#45;&#45;text': sortBy === key }">-->
+<!--                  <v-list dense>-->
+<!--                    <v-list-item-->
+<!--                        v-for="(key, index) in filteredKeys"-->
+<!--                        :key="index"-->
+<!--                    >-->
+<!--&lt;!&ndash;                      <v-list-item-content :class="{ 'blue&#45;&#45;text': sortBy === key }">&ndash;&gt;-->
+<!--&lt;!&ndash;                      </v-list-item-content>&ndash;&gt;-->
+<!--                      <v-list-item-content-->
+<!--                          class="align-end"-->
+<!--                          :class="{ 'blue&#45;&#45;text': sortBy === key }"-->
+<!--                      >-->
+<!--                        {{ item.topicName }}-->
 <!--                      </v-list-item-content>-->
-                      <v-list-item-content
-                          class="align-end"
-                          :class="{ 'blue--text': sortBy === key }"
-                      >
-                        {{ item[key.toLowerCase()] }}
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
+<!--                      <v-list-item-content-->
+<!--                          class="align-end"-->
+<!--                          :class="{ 'blue&#45;&#45;text': sortBy === key }"-->
+<!--                      >-->
+<!--                        {{ item.authorName }}-->
+<!--                      </v-list-item-content>-->
+<!--                    </v-list-item>-->
+<!--                  </v-list>-->
                 </v-card>
                </router-link>
               </v-col>
@@ -213,78 +219,7 @@ export default {
       'author',
       'date',
     ],
-    publications: [
-      // {
-      //   title: 'Frozen Yogurt',
-      //   parentTopic: 159,
-      //   topic: 6.0,
-      //   author: 24,
-      //   date: 4.0,
-      // },
-      // {
-      //   title: 'Frozen Yogurt',
-      //   parentTopic: 159,
-      //   topic: 6.0,
-      //   author: 24,
-      //   date: 4.0,
-      // },
-      // {
-      //   title: 'Frozen Yogurt',
-      //   parentTopic: 159,
-      //   topic: 6.0,
-      //   author: 24,
-      //   date: 4.0,
-      // },
-      // {
-      //   title: 'Frozen Yogurt',
-      //   parentTopic: 159,
-      //   topic: 6.0,
-      //   author: 24,
-      //   date: 4.0,
-      // },
-      // {
-      //   title: 'Frozen Yogurt',
-      //   parentTopic: 159,
-      //   topic: 6.0,
-      //   author: 24,
-      //   date: 4.0,
-      // },
-      // {
-      //   title: 'Frozen Yogurt',
-      //   parentTopic: 159,
-      //   topic: 6.0,
-      //   author: 24,
-      //   date: 4.0,
-      // },
-      // {
-      //   title: 'Frozen Yogurt',
-      //   parentTopic: 159,
-      //   topic: 6.0,
-      //   author: 24,
-      //   date: 4.0,
-      // },
-      // {
-      //   title: 'Frozen Yogurt',
-      //   parentTopic: 159,
-      //   topic: 6.0,
-      //   author: 24,
-      //   date: 4.0,
-      // },
-      // {
-      //   title: 'Frozen Yogurt',
-      //   parentTopic: 159,
-      //   topic: 6.0,
-      //   author: 24,
-      //   date: 4.0,
-      // },
-      // {
-      //   title: 'Frozen Yogurt',
-      //   parentTopic: 159,
-      //   topic: 6.0,
-      //   author: 24,
-      //   date: 4.0,
-      // },
-    ]
+    publications: []
   }),
   computed: {
     numberOfPages() {
@@ -308,19 +243,17 @@ export default {
       this.publications = data
     }
   },
-  mounted() {
-    axios
+  async mounted(){
+  try {
+    const res = await axios
         .get("http://localhost:8081/kpdteti/api/publications/all")
-        .then((response) =>
-            // handle success
-            this.setPublications(response.data))
-        .catch((error) =>
-            // handle error
-            console.log(error))
-
-  },
-};
-
+    this.publications = res.data
+    console.log(res.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+}
 </script>
 <style>
 

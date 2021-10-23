@@ -74,7 +74,6 @@ export default {
         { title: 'Classification', route: '/classification' },
         { title: 'Publication', route: '/publication' },
         { title: 'Author', route: '/author' },
-        { title: 'Account', route: '/account' },
         { title: 'Logout', route: '/logout' },
       ],
     };
