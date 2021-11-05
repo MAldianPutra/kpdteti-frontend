@@ -25,7 +25,7 @@
             <v-card-title
             class="justify-center">PUBLICATION CLASSIFICATION FORM
             </v-card-title>
-            <form @submit="submit" method="post">
+            <form @submit.prevent="postPublication" method="post">
 
 <!--          input title    -->
               <v-text-field
@@ -272,17 +272,24 @@ export default {
   },
 
   methods: {
-    // postPublication() {
-    //   axios.post('http://localhost:8081/kpdteti/api/publications', {
-    //
-    //   })
-    //       .then(function (response) {
-    //         console.log(response);
-    //       })
-    //       .catch(function (error) {
-    //         console.log(error);
-    //       });
-    // },
+    postPublication(){
+      // const response = await axios.post('http://localhost:8081/kpdteti/api/publications')
+      axios.post('http://localhost:8081/kpdteti/api/publications', {
+        publicationTitle: '',
+        authorId: '',
+        publicationDate: '',
+        publicationPublisher: '',
+        publicationDescription: '',
+        savePDF: true,
+        userId: 'usr-335930d7-026c-453b-9fb5-7d4fc112e3c6'
+      })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    },
     //   const publication = publication.stringify ({
     //     publicationTitle: '',
     //     authorId: '',
@@ -315,25 +322,30 @@ export default {
       if (index >= 0) this.authors.splice(index, 1)
     },
     submit() {
-      axios.post('http://localhost:8081/kpdteti/api/publications', {
-            publicationTitle:'',
-            authorId:'',
-            otherAuthors:'',
-            publicationDate:'',
-            publicationPublisher : '',
-            publicationDescription : '',
-            savePDF : false
-
-            })
-            .then(function () {
-                  console.log(this.publicationTitle);
-            })
-               .catch(function (error) {
-                 console.log(error);
-              });
+      // axios.post('http://localhost:8081/kpdteti/api/publications', {
+      //       publicationTitle:'',
+      //       authorId:'',
+      //       otherAuthors:'',
+      //       publicationDate:'',
+      //       publicationPublisher : '',
+      //       publicationDescription : '',
+      //       savePDF : false
+      //
+      //       })
+      //       .then(function () {
+      //             console.log(this.publicationTitle);
+      //       })
+      //          .catch(function (error) {
+      //            console.log(error);
+      //         });
       // this.$v.$touch()
-      // console.log(this.form)
-      // this.showSteps = false
+      //     publicationDescription: '',
+      //     savePDF: true,
+      //     userId: 'usr-335930d7-026c-453b-9fb5-7d4fc112e3c6'
+      console.log('publicationTitle:',this.publicationTitle)
+      console.log('authorId:',this.authorId)
+      console.log('publicationDate:',this.publicationDate)
+      console.log('publicationPublisher:',this.publicationPublisher)
     },
     clear() {
       this.$v.$touch()
