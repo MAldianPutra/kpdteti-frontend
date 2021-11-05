@@ -25,7 +25,7 @@
             <v-card-title
             class="justify-center">PUBLICATION CLASSIFICATION FORM
             </v-card-title>
-            <form @submit="postPublication" method="post">
+            <form @submit="submit" method="post">
 
 <!--          input title    -->
               <v-text-field
@@ -53,11 +53,14 @@
                     chips
                     small-chips
                     color="cyan darken-2"
-                    label="Publication Author"
+                    label="Publication Author ( DTETI Lecturer )"
+                    item-text="authorName"
+                    item-value="authorId"
                     multiple
                 >
                   <template v-slot:selection="data">
                     <v-chip
+                        v-bind="data.attrs"
                         :input-value="data.selected"
                         close
                         @click="data.select"
@@ -70,22 +73,32 @@
                     </v-chip>
                   </template>
                   <template v-slot:item="data">
-                    <template v-if="typeof data.item !== 'object'">
-                      <v-list-item-content v-text="data.item"></v-list-item-content>
+                    <template>
+                      <v-list-item-content v-text="data.item.authorName"></v-list-item-content>
                     </template>
 <!--                    <template v-else>-->
 <!--                      <v-list-item-avatar>-->
 <!--                        <img :src="data.item.avatar">-->
 <!--                      </v-list-item-avatar>-->
-                      <v-list-item-content>
-                        <v-list-item-title v-html="data.item.authorName"></v-list-item-title>
-                      </v-list-item-content>
-                    </template>
-<!--                  </template>-->
+<!--                      <v-list-item-content>-->
+<!--                        <v-list-item-title v-html="data.item.authorName"></v-list-item-title>-->
+<!--                      </v-list-item-content>-->
+<!--                    </template>-->
+                  </template>
                 </v-autocomplete>
               </v-col>
 <!--        end of input author -->
 
+<!--              input other author-->
+              <v-text-field
+                  class="pb-2"
+                  v-model="otherAuthors"
+                  :error-messages="otherErrors"
+                  color="cyan darken-2"
+                  outlined
+                  label="Another Author (Non DTETI Lecturer)"
+                  required
+              ></v-text-field>
 <!--        input date-->
               <v-menu
                   v-model="menu"
@@ -189,6 +202,7 @@ export default {
   validations: {
     publicationTitle: {required},
     authorId: {required},
+    otherAuthors:{required},
     publicationDate: {required},
     publicationPublisher: {required},
     publicationDescription: {required},
@@ -200,9 +214,10 @@ export default {
   },
 
   data: () => ({
-    authors: null,
+    authors: [],
     publicationTitle: '',
-    authorId: '',
+    authorId: [],
+    otherAuthors:'',
     publicationDate: '',
     publicationPublisher: '',
     publicationDescription: '',
@@ -229,6 +244,12 @@ export default {
       !this.$v.authorId.required && errors.push('Author is required.')
       return errors
     },
+    // otherErrors() {
+    //   const errors = []
+    //   if (!this.$v.otherAuthors.$dirty) return errors
+    //   !this.$v.otherAuthors.required && errors.push('publisher is required.')
+    //   return errors
+    // },
     publicationDateErrors() {
       const errors = []
       if (!this.$v.publicationDate.$dirty) return errors
@@ -251,59 +272,74 @@ export default {
   },
 
   methods: {
-    postPublication() {
-      axios.post('http://localhost:8081/kpdteti/api/publications', {
-        publicationTitle: 'Improving Data Quality and Data Governance Using \n' +
-            'Master Data Management: A Review',
-        authorId: 'Ir. Paulus Insap Santosa, M.Sc., Ph.D',
-        publicationDate: '2021-09-03',
-        publicationPublisher: 'DTETI',
-        publicationDescription: 'Master data management (MDM) is a method of \n' +
-            'maintaining, integrating, and harmonizing master data to ensure \n' +
-            'consistent system information. The primary function of MDM is \n' +
-            'to control master data to keep it consistent, accurate, current, \n' +
-            'relevant, and contextual to meet different business needs across \n' +
-            'applications and divisions. MDM also affects data governance, \n' +
-            'which is related to establishing organizational actors’ roles, \n' +
-            'functions, and responsibilities in maintaining data quality. Poor \n' +
-            'management of master data can lead to inaccurate and incomplete \n' +
-            'data, leading to lousy stakeholder decision-making. This article is \n' +
-            'a literature review that aims to determine how MDM improves the \n' +
-            'data quality and data governance and assess the success of MDM \n' +
-            'implementation. The review results show that MDM can \n' +
-            'overcome data quality problems through the MDM process \n' +
-            'caused by data originating from various scattered sources. MDM \n' +
-            'encourages organizations to improve data management by \n' +
-            'adjusting the roles and responsibilities of business actors and \n' +
-            'information technology (IT) staff documented through data \n' +
-            'governance. Assessment of the success of MDM implementation \n' +
-            'can be carried out by organizations to improve data quality and \n' +
-            'data governance by following the existing framework.',
-        savePDF: true,
-        userId: 'usr-335930d7-026c-453b-9fb5-7d4fc112e3c6'
-      })
-          .then((response) => {
-            console.log(response);
-          }, (error) => {
-            console.log(error);
-          });
-    },
+    // postPublication() {
+    //   axios.post('http://localhost:8081/kpdteti/api/publications', {
+    //
+    //   })
+    //       .then(function (response) {
+    //         console.log(response);
+    //       })
+    //       .catch(function (error) {
+    //         console.log(error);
+    //       });
+    // },
+    //   const publication = publication.stringify ({
+    //     publicationTitle: '',
+    //     authorId: '',
+    //     otherAuthors: '',
+    //     publicationDate: '',
+    //     publicationPublisher: '',
+    //     publicationDescription: '',
+    //     savePDF: false,
+    //     userId: 'usr-335930d7-026c-453b-9fb5-7d4fc112e3c6'
+    //   });
+    //   const res = await axios.post('http://localhost:8081/kpdteti/api/publications', {
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   });
+    //   console.log(res.data.data);
+    //   res.data.headers['Content-Type'];
+    // },
+
+    // }
+    //   });
+    //       console.log(res.data.data);
+      // res.data.headers['Content-Type'];
+    // },
     // getAuthors(data){
     //   this.authors = data
     // },
     remove(item) {
-      const index = this.authors.indexOf(item.authorName)
+      const index = this.authors.indexOf(item.authorId)
       if (index >= 0) this.authors.splice(index, 1)
     },
     submit() {
+      axios.post('http://localhost:8081/kpdteti/api/publications', {
+            publicationTitle:'',
+            authorId:'',
+            otherAuthors:'',
+            publicationDate:'',
+            publicationPublisher : '',
+            publicationDescription : '',
+            savePDF : false
+
+            })
+            .then(function () {
+                  console.log(this.publicationTitle);
+            })
+               .catch(function (error) {
+                 console.log(error);
+              });
       // this.$v.$touch()
-      console.log(this.authorId)
+      // console.log(this.form)
       // this.showSteps = false
     },
     clear() {
       this.$v.$touch()
       this.publicationTitle = ''
       this.authorId = ''
+      this.otherAuthors = ''
       this.publicationDate = ''
       this.publicationPublisher = ''
       this.publicationDescription = ''

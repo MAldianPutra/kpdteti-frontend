@@ -4,8 +4,8 @@
     <div id="heroSection">
       <section>
         <v-container class="firstSection">
-          <div style="{backgroundImage: url('~@/assets/jjj.png')}">
-          </div>
+<!--          <div style="{backgroundImage: url('~@/assets/annie-spratt-5cFwQ-WMcJU-unsplash.jpg')}">-->
+<!--          </div>-->
           <pre class="tab1"></pre>
           <h1>Selamat Datang di KP-DTETI!</h1><br>
           <h1>Sistem Klasifikasi Hasil Publikasi DTETI</h1><br>
@@ -108,18 +108,21 @@
 
     </div>
 <!--   <h1>Ini dashboard</h1>-->
+    <MainFooter></MainFooter>
   </div>
 
 </template>
 
 <script>
   import MainAppbar from '@/components/MainAppbar.vue';
+  import MainFooter from '@/components/MainFooter';
   import axios from "axios";
   // import topicData from '@/json/db.json';
 
   export default {
   name: "DashboardPage",
   components: {
+    MainFooter,
       MainAppbar
     },
     data(){
@@ -155,10 +158,10 @@
 
 <style scoped>
   .firstSection{
-    background: url('../assets/bakg_research.jpg');
+    background: url('../assets/annie-spratt-5cFwQ-WMcJU-unsplash.jpg');
     background-size: cover;
-    height:250%;
-    width: 100%;
+    height:500%;
+    width: 200%;
     word-wrap: normal;
   }
 

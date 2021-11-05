@@ -3,25 +3,33 @@
     <main-appbar></main-appbar>
     <v-container>
       <h1>Author List</h1>
-
       <v-row>
         <v-col
+        cols="12"
         v-for="author in authors"
-        :key="author.authorName"
-        cols="12">
+        :key="author.authorName">
           <v-card
-              height="60"
               class="mx-auto"
               outlined
-              max-width="800"
+              max-width="700"
               elevation="4"
               @click="authorProfile()">
             <v-list>
-              <v-list-item-avatar>
-
-                <v-card-title>{{author.authorName}}</v-card-title>
-
-              </v-list-item-avatar>
+              <v-list-item>
+                <v-avatar
+                    color="teal">
+                  <v-icon
+                      dark>
+                    mdi-account-circle
+                  </v-icon>
+                  <!--                      <v-img></v-img>-->
+                </v-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title
+                    v-text="author.authorName"></v-list-item-title>
+  <!--                  <v-card-title></v-card-title>-->
+                </v-list-item-content>
+              </v-list-item>
           </v-list>
           </v-card>
         </v-col>
