@@ -47,7 +47,7 @@
               md="4"
               v-for="topic in Topics"
               :key="topic.topicParentId">
-           <router-link :to="{name: 'publication topic',params:{id:topic.topicParentId} }">
+           <router-link :to="{name: 'publication topic',params:{id:topic.topicParentId}}">
             <v-card
                 class="pa-4"
                 outlined

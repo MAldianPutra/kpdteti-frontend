@@ -3,8 +3,29 @@
     <main-appbar></main-appbar>
     <v-container>
     <h1>Publication List by Topic</h1>
-    <h2>Topic:{{topic.topicParentName}}</h2>
+<!--    <h2>Topic:{{topic.topicParentName}}</h2>-->
         <v-container fluid>
+          <v-row>
+          <v-col
+          cols="12"
+          v-for="publication in publications"
+          :key="publication.publicationTitle">
+          <v-card
+              class="mx-auto"
+              outlined
+              max-width="700"
+              elevation="4">
+          <v-list>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title
+                v-text="publication.publicationTitle"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+          </v-card>
+          </v-col>
+          </v-row>
 <!--          <v-data-iterator-->
 <!--              :items="items"-->
 <!--              :items-per-page.sync="itemsPerPage"-->
@@ -163,6 +184,7 @@ export default {
     MainAppbar,
   },
   data: () => ({
+    publications: [],
     // itemsPerPageArray: [10, 15, 20],
     // search: '',
     // filter: {},
@@ -295,6 +317,9 @@ export default {
     // },
   },
   methods: {
+    showPublications(data){
+      this.publication=data
+    }
   //   nextPage () {
   //     if (this.page + 1 <= this.numberOfPages) this.page += 1
   //   },
@@ -305,16 +330,18 @@ export default {
   //     this.itemsPerPage = number
   //   },
   },
-  mounted() {
-    axios.get("http://localhost:8081/kpdteti/api/parents/all")
-        .then((response) =>
+ async mounted() {
+    try {
+    const res = await axios
+        .get("http://localhost:8081/kpdteti/api/topics/publications/"+ this.topicParentId)
             // handle success
-            this.showTopicParent(response.data))
+            this.showPublications(res.data)
         // this.Topics(response.data))
-        .catch((error) =>
+        // console.log(res.data)
+    }catch(error) {
             // handle error
-            console.log(error))
-
+            console.log(error)
+    }
   },
 }
 </script>
