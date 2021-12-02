@@ -29,6 +29,12 @@
       >
         <span style="color:rgba(36,35,36,0.89)">{{ menu.title }}</span>
       </v-btn>
+    <v-btn v-if="!$store.state.token" text class="hidden-sm-and-down"  @click="$router.push('/login')">
+      <span style="color:rgba(36,35,36,0.89)">Login</span>
+    </v-btn>
+    <v-btn v-else text class="hidden-sm-and-down" @click="logout">
+      <span style="color:rgba(36,35,36,0.89)" >Logout</span>
+    </v-btn>
 <!--    <v-menu offset-y>-->
 <!--      <template v-slot:activator="{ on }">-->
 <!--        <v-btn-->
@@ -66,6 +72,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -74,11 +81,14 @@ export default {
         { title: 'Classification', route: '/classification' },
         { title: 'Publication', route: '/publication' },
         { title: 'Author', route: '/author' },
-        { title: 'Logout', route: '/logout' },
       ],
     };
   },
+  computed: {
+    ...mapGetters(["isLoggedIn"])
+  },
   methods: {
+    ...mapActions(['logout']),
     redirectPage() {
 
     }

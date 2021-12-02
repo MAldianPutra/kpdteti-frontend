@@ -2,8 +2,8 @@
   <div>
     <main-appbar></main-appbar>
     <div id="heroSection">
-      <section>
-        <v-container class="firstSection">
+      <section class="firstSection">
+        <v-container >
 <!--          <div style="{backgroundImage: url('~@/assets/annie-spratt-5cFwQ-WMcJU-unsplash.jpg')}">-->
 <!--          </div>-->
           <pre class="tab1"></pre>
@@ -161,7 +161,7 @@
     background: url('../assets/annie-spratt-5cFwQ-WMcJU-unsplash.jpg');
     background-size: cover;
     height:500%;
-    width: 200%;
+    width: 100vw;
     word-wrap: normal;
   }
 

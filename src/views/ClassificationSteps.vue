@@ -93,6 +93,7 @@
 
 <script>
 import MainAppbar from "@/components/MainAppbar";
+import axios from "axios";
 export default {
   name: "ClassificationSteps",
 
@@ -106,6 +107,16 @@ export default {
       showSteps : true,
     }
   },
+
+  mounted(){
+    axios.get('http://localhost:8081/kpdteti/api/publications/' + this.$route.params.id)
+      .then(function (response) {
+        console.log(response.data)
+      })
+      .catch(function (error){
+        console.log(error);
+    });
+  }
 }
 
 </script>

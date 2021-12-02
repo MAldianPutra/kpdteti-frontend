@@ -2,6 +2,7 @@
       <v-footer
           dark
           padless
+          class="mt-16"
       >
         <v-card
             flat
@@ -11,25 +12,44 @@
         >
           <v-card-text>
             <v-container>
-              <v-col>
-                <v-row
-                    class="mx-md-auto"
-                >
+<!--              <v-col>-->
+<!--                <v-row-->
+<!--                    class="mx-md-auto"-->
+<!--                >-->
+<!--                  <v-img-->
+<!--                      max-height="80"-->
+<!--                      max-width="80"-->
+<!--                      position="center"-->
+<!--                      class="mx-4"-->
+<!--                      :src="require('../assets/Logo DTETI Fix Grey-01.png')"-->
+<!--                  ></v-img>-->
+<!--                  <v-img-->
+<!--                      max-height="40"-->
+<!--                      max-width="40"-->
+<!--                      class="mx-4"-->
+<!--                      :src="require('../img/Asset1.svg')"-->
+<!--                  ></v-img>-->
+<!--                 </v-row>-->
+<!--              </v-col>-->
+              <div class="d-flex justify-center">
+                <div>
                   <v-img
-                      max-height="80"
-                      max-width="80"
-                      position="center"
-                      class="mx-4"
-                      :src="require('../assets/Logo DTETI Fix Grey-01.png')"
-                  ></v-img>
-                  <v-img
-                      max-height="40"
-                      max-width="40"
-                      class="mx-4"
-                      :src="require('../img/Asset1.svg')"
-                  ></v-img>
-                 </v-row>
-              </v-col>
+                                          max-height="80"
+                                          max-width="80"
+                                          position="center"
+                                          class="mx-4"
+                                          :src="require('../assets/Logo DTETI Fix Grey-01.png')"
+                                      ></v-img>
+                </div>
+                <div>
+                                    <v-img
+                                        max-height="40"
+                                        max-width="40"
+                                        class="mx-4"
+                                        :src="require('../img/Asset1.svg')"
+                                    ></v-img>
+                </div>
+              </div>
             </v-container>
 <!--            <v-btn-->
 <!--                v-for="icon in icons"-->

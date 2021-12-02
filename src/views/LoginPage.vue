@@ -18,17 +18,17 @@
         <v-card-title>Login</v-card-title>
         <form>
             <v-text-field
-            v-model="username"
-            label="Username"
+            v-model="form.email"
+            label="Email"
             filled
             rounded>
             </v-text-field>
             <v-text-field
-            v-model="password"
+            v-model="form.password"
             label="Password"
             filled
             rounded></v-text-field>
-            <v-btn type="submit">Login</v-btn>
+            <v-btn @click="submit">Login</v-btn>
         </form>
       </v-card>
     </v-container>
@@ -37,20 +37,31 @@
 
 <script>
 import { validationMixin } from 'vuelidate';
+import { mapActions } from 'vuex'
 import {required,minLength} from 'vuelidate/lib/validators';
 export default {
   name: "LoginPage",
-
   mixins: [validationMixin],
 
+  data: () => ({
+    form: {
+      email: '',
+      password: '',
+    }}),
+
   validations:{
-    username:{required},
-    password:{
-      required,
-      minLength: minLength(5),
-    }
+    email:{required},
+    password:{required, minLength: minLength(5)}
+  },
+
+  methods: {
+    ...mapActions(["login"]),
+    submit(){
+      console.log('login page', this.form)
+      this.login({userEmail: this.form.email, userPassword: this.form.password})}
   }
 }
+
 </script>
 
 <style scoped>

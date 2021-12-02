@@ -18,12 +18,13 @@ const routes = [
     {
         path: '/classification',
         name: 'publication classification',
-        component: () => import(/*webpackChunkName: "publication classification" */'../views/PostPublicationPage')
+        component: () => import(/*webpackChunkName: "publication classification" */'../views/PostPublicationPage'),
+        meta: { requiresAuth: true }
     },
     {
       path: '/author',
       name: 'author',
-      component: () => import(/* webpackChunkName: "author profile" */'../views/AuthorList.vue') 
+      component: () => import(/* webpackChunkName: "author profile" */'../views/AuthorList.vue')
     },
     {
         path: '/publication',
@@ -34,7 +35,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "publication" */ '../views/PublicationDetailPage.vue'),
     },
     {
-        path: '/classification/steps',
+        path: '/classification/steps/:id',
         name: 'classification steps',
         component: () => import(/* webpackChunkName: "classification steps" */'../views/ClassificationSteps.vue'),
     },
@@ -58,12 +59,41 @@ const routes = [
         name: 'author profile',
         component: () => import(/* webpackChunkName: "publication topic" */'../views/AuthorProfilePage.vue'),
     },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import(/* webpackChunkName: "publication topic" */'../views/LoginPage.vue'),
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: () => import(/* webpackChunkName: "publication topic" */'../views/RegisterPage.vue'),
+    },
 ];
 
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes,
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(value => value.meta.requiresAuth)) {
+        if (localStorage.getItem('token') == null) {
+            next({
+                path: '/login',
+            });
+        } else {
+            next();
+        }
+    } else if (to.path === '/login' && localStorage.getItem('token') != null) {
+        next({
+            path: '/messages',
+            replace: true,
+        });
+    } else {
+        next();
+    }
 });
 
 export default router;
