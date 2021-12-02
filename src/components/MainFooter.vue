@@ -44,8 +44,8 @@
           </v-card-text>
 
           <v-card-text class="white--text pt-0">
-            KP-DTETI is a system to help user to do a classification for publication's products.
-            Publication's will be classified into 38 label's that user can choose.
+            KP-DTETI is a system for helping the user to classify the publications.
+            The publications will be classified into 38 labels.
             Not only classification, user also can see about author's profile and finding publications.
           </v-card-text>
 

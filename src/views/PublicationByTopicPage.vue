@@ -3,27 +3,51 @@
     <main-appbar></main-appbar>
     <v-container>
     <h1>Publication List by Topic</h1>
+      <v-text
+      style=""></v-text>
 <!--    <h2>Topic:{{topic.topicParentName}}</h2>-->
         <v-container fluid>
+          <v-col
+          class="d-flex"
+          cols="6">
+          <v-select
+          :items="topics"
+          color="teal darken-2"
+          label="Another Topics"
+          item-text="topicName"
+          item-value="topicId"
+          @click="showAnotherPublications()"
+          outlined>
+          </v-select>
+          </v-col>
           <v-row>
           <v-col
           cols="12"
           v-for="publication in publications"
-          :key="publication.publicationTitle">
+          :key="publication.publicationId">
+          <router-link
+          style="text-decoration: none; color: inherit;"
+          :to="{name: 'Publication Profile',params:{id:publication.publicationId}}">
           <v-card
               class="mx-auto"
               outlined
-              max-width="700"
-              elevation="4">
+              max-width="900"
+              elevation="4"
+              >
           <v-list>
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title
                 v-text="publication.publicationTitle"></v-list-item-title>
+                <v-divider></v-divider>
+                <v-card-content
+               v-for="author in publication.authorDto"
+               :key="author.authorId">{{author.authorName}}</v-card-content>
               </v-list-item-content>
             </v-list-item>
           </v-list>
           </v-card>
+          </router-link>
           </v-col>
           </v-row>
 <!--          <v-data-iterator-->
@@ -179,12 +203,13 @@ import axios from "axios";
 
 export default {
   name: "PublicationByTopicPage",
-  props:['id'],
-  components:{
+  props: ['id'],
+  components: {
     MainAppbar,
   },
   data: () => ({
     publications: [],
+    topics: [],
     // itemsPerPageArray: [10, 15, 20],
     // search: '',
     // filter: {},
@@ -317,31 +342,66 @@ export default {
     // },
   },
   methods: {
-    showPublications(data){
-      this.publication=data
-    }
-  //   nextPage () {
-  //     if (this.page + 1 <= this.numberOfPages) this.page += 1
-  //   },
-  //   formerPage () {
-  //     if (this.page - 1 >= 1) this.page -= 1
-  //   },
-  //   updateItemsPerPage (number) {
-  //     this.itemsPerPage = number
-  //   },
+    showPublications(data) {
+      this.publications = data
+    },
+    showTopics(data){
+      this.topics = data
+    },
+    showAnotherPublications(){
+      this.$router.push({name:'publication topic', params: {id: '[topicId]'}});
+    },
+    // showPublicationProfile(){
+    //   this.$router.push({name:'publication profile', params: {id: '[publicationId]'}});
+    // }
+    //   nextPage () {
+    //     if (this.page + 1 <= this.numberOfPages) this.page += 1
+    //   },
+    //   formerPage () {
+    //     if (this.page - 1 >= 1) this.page -= 1
+    //   },
+    //   updateItemsPerPage (number) {
+    //     this.itemsPerPage = number
+    //   },
   },
- async mounted() {
+  async mounted() {
+    let link = [
+      `http://localhost:8081/kpdteti/api/topics/parents?topicParentId=${this.$route.params.id}`,
+      `http://localhost:8081/kpdteti/api/topics/publications?topicOrParentId=${this.$route.params.id}`
+    ]
     try {
-    const res = await axios
-        .get("http://localhost:8081/kpdteti/api/topics/publications/"+ this.topicParentId)
-            // handle success
-            this.showPublications(res.data)
-        // this.Topics(response.data))
-        // console.log(res.data)
-    }catch(error) {
-            // handle error
-            console.log(error)
-    }
+          axios.all(link.map((link) => axios.get(link)))
+          .then((data) => {this.showPublications(data[1].data),this.showTopics(data[0].data),console.log(data[0].data),console.log(data[1].data)}
+          );}
+      catch(error){
+        //         // handle error
+                console.log(error)
+        //   // console.log(this.$route.params.id)
+        }
+      // const res = await axios
+      //     .get(`http://localhost:8081/kpdteti/api/topics/publications?topicOrParentId=${this.$route.params.id}`)
+      //         // handle success
+      //         this.showPublications(res.data)
+      //     // this.publications(res.data)
+      //     // console.log(res.data)
+      // }catch(error) {
+      //         // handle error
+      //         console.log(error)
+      //   // console.log(this.$route.params.id)
+      // }
+      // try {
+      // const res = await axios
+      //     .get(`http://localhost:8081/kpdteti/api/topics/publications?topicOrParentId=${this.$route.params.id}`)
+      //         // handle success
+      //         this.showPublications(res.data)
+      //     // this.publications(res.data)
+      //     // console.log(res.data)
+      // }catch(error) {
+      //         // handle error
+      //         console.log(error)
+      //   // console.log(this.$route.params.id)
+      // }
+
   },
 }
 </script>

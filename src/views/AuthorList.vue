@@ -179,11 +179,13 @@
 <!--      </v-data-iterator>-->
 <!--    </v-container>-->
 <!--   </v-container>-->
+    <MainFooter></MainFooter>
   </v-content>
 </template>
 
 <script>
 import MainAppbar from "@/components/MainAppbar.vue";
+import MainFooter from "@/components/MainFooter";
 import axios from "axios";
 
 
@@ -191,6 +193,7 @@ export default {
   name: "AuthorList",
   components: {
     MainAppbar,
+    MainFooter,
   },
   data:()=>({
     authors: [],

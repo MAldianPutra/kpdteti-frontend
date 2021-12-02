@@ -94,7 +94,7 @@
                   md="4"
                   lg="3"
               >
-                <router-link :to="{name : 'publication profile' }">
+                <router-link :to="{name : 'Publication Profile' }">
                 <v-card>
                   <v-card-title class="subheading font-weight-bold">
                     {{ item.publicationTitle }}

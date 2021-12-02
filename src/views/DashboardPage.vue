@@ -123,7 +123,7 @@
   name: "DashboardPage",
   components: {
     MainFooter,
-      MainAppbar
+    MainAppbar
     },
     data(){
     return{
