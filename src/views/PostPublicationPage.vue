@@ -46,14 +46,14 @@
               md="13">
                 <v-autocomplete
                     class="pb-2"
-                    v-model="authorId"
+                    v-model="authorIds"
                     :items="authors"
                     outlined
                     :error-messages="authorErrors"
                     chips
                     small-chips
                     color="cyan darken-2"
-                    label="Publication Author ( DTETI Lecturer )"
+                    label="Publication Author (DTETI Lecturer)"
                     item-text="authorName"
                     item-value="authorId"
                     multiple
@@ -142,7 +142,7 @@
 <!--        input abstract-->
               <v-textarea
                   class="pb-2"
-                  v-model="publicationDescription"
+                  v-model="publicationAbstract"
                   :error-messages="abstractErrors"
                   color="cyan darken-2"
                   required
@@ -216,11 +216,11 @@ export default {
   data: () => ({
     authors: [],
     publicationTitle: '',
-    authorId: [],
+    authorIds: [],
     otherAuthors:[],
     publicationDate: '',
     publicationPublisher: '',
-    publicationDescription: '',
+    publicationAbstract: '',
     savePDF: false,
     topicId:[],
     userId: ''
@@ -326,21 +326,19 @@ export default {
     submit() {
       axios.post('http://localhost:8081/kpdteti/api/xpath/publications', {
         publicationTitle: this.publicationTitle,
-        authorIds: this.authorId,
-        otherAuthors: [this.otherAuthors],
+        authorIds: this.authorIds,
+        otherAuthors: this.otherAuthors.split,
         publicationDate: this.publicationDate,
         publicationPublisher: this.publicationPublisher,
-        publicationDescription: this.publicationDescription,
-        savePDF: false,
-        // topicIds:['top-e721c2b1-ccba-4f9b-8514-624ff9d48eac'],
-        userId: 'usr-335930d7-026c-453b-9fb5-7d4fc112e3c6'
+        publicationAbstract: this.publicationAbstract,
+        userId: 'usr-158b674c-523f-45a5-b28f-4d7239af18cd'
       })
           .then(function (response) {
             console.log(response);
-            // if(response.status === 200) {
-            //   this.$router.push({ path : '/classification/steps' });
-            // }
-            // console.log(response);
+            if(response.status === 200) {
+              console.log("Redirect euy")
+              this.$router.push('/classification/steps');
+            }
           })
           .catch(function (error) {
             console.log(error);
@@ -377,18 +375,18 @@ export default {
       //     savePDF: true,
       //     userId: 'usr-335930d7-026c-453b-9fb5-7d4fc112e3c6'
       console.log('publicationTitle:',this.publicationTitle)
-      console.log('authorId:',this.authorId)
+      console.log('authorId:',this.authorIds)
       console.log('publicationDate:',this.publicationDate)
       console.log('publicationPublisher:',this.publicationPublisher)
     },
     clear() {
       this.$v.$touch()
       this.publicationTitle = ''
-      this.authorId = ''
+      this.authorIds = ''
       this.otherAuthors = ''
       this.publicationDate = ''
       this.publicationPublisher = ''
-      this.publicationDescription = ''
+      this.publicationAbstract = ''
       this.savePDF = false
     }
   },

@@ -46,7 +46,7 @@
               cols="12"
               md="4"
               v-for="topic in Topics"
-              :key="topic.topicParentId">
+              :key="topic.topicId">
            <router-link :to="{name: 'publication topic',params:{id:topic.topicParentId}}">
             <v-card
                 class="pa-4"
@@ -54,7 +54,7 @@
                 rounded-xl
                 color="cyan darken-2"
             >
-              {{ topic.topicParentName }}
+              {{ topic.topicName }}
             </v-card>
            </router-link>
           </v-col>
@@ -132,16 +132,16 @@
       }
     },
     methods:{
-    showTopicParent(data){
+    showTopic(data){
       this.Topics=data
       }
     },
     mounted(){
       axios
-      .get("http://localhost:8081/kpdteti/api/parents/all")
+      .get("http://localhost:8081/kpdteti/api/topics/all")
           .then((response) =>
               // handle success
-              this.showTopicParent(response.data))
+              this.showTopic(response.data))
           // this.Topics(response.data))
           .catch((error) =>
               // handle error
