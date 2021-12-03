@@ -7,19 +7,19 @@
       style=""></v-text>
 <!--    <h2>Topic:{{topic.topicParentName}}</h2>-->
         <v-container fluid>
-          <v-col
-          class="d-flex"
-          cols="6">
-          <v-select
-          :items="topics"
-          color="teal darken-2"
-          label="Another Topics"
-          item-text="topicName"
-          item-value="topicId"
-          @click="showAnotherPublications()"
-          outlined>
-          </v-select>
-          </v-col>
+<!--          <v-col-->
+<!--          class="d-flex"-->
+<!--          cols="6">-->
+<!--          <v-select-->
+<!--          :items="topics"-->
+<!--          color="teal darken-2"-->
+<!--          label="Another Topics"-->
+<!--          item-text="topicName"-->
+<!--          item-value="topicId"-->
+<!--          @click="showAnotherPublications()"-->
+<!--          outlined>-->
+<!--          </v-select>-->
+<!--          </v-col>-->
           <v-row>
           <v-col
           cols="12"
@@ -31,7 +31,7 @@
           <v-card
               class="mx-auto"
               outlined
-              max-width="900"
+              max-width="1000"
               elevation="4"
               >
           <v-list>
@@ -209,7 +209,7 @@ export default {
   },
   data: () => ({
     publications: [],
-    topics: [],
+    // topics: [],
     // itemsPerPageArray: [10, 15, 20],
     // search: '',
     // filter: {},
@@ -345,9 +345,9 @@ export default {
     showPublications(data) {
       this.publications = data
     },
-    showTopics(data){
-      this.topics = data
-    },
+    // showTopics(data){
+    //   this.topics = data
+    // },
     showAnotherPublications(){
       this.$router.push({name:'publication topic', params: {id: '[topicId]'}});
     },
@@ -364,20 +364,34 @@ export default {
     //     this.itemsPerPage = number
     //   },
   },
-  async mounted() {
-    let link = [
-      `http://localhost:8081/kpdteti/api/topics/parents?topicParentId=${this.$route.params.id}`,
-      `http://localhost:8081/kpdteti/api/topics/publications?topicOrParentId=${this.$route.params.id}`
-    ]
+  async mounted(){
     try {
-          axios.all(link.map((link) => axios.get(link)))
-          .then((data) => {this.showPublications(data[1].data),this.showTopics(data[0].data),console.log(data[0].data),console.log(data[1].data)}
-          );}
-      catch(error){
-        //         // handle error
-                console.log(error)
-        //   // console.log(this.$route.params.id)
-        }
+      const res = await axios
+          .get(`http://localhost:8081/kpdteti/api/topics/publications?topicId=${this.$route.params.id}`)
+              // handle success
+              this.showPublications(res.data)
+          // this.publications(res.data)
+          // console.log(res.data)
+      }catch(error) {
+              // handle error
+              console.log(error)
+        // console.log(this.$route.params.id)
+      }
+
+  // async mounted() {
+  //   let link = [
+  //     `http://localhost:8081/kpdteti/api/topics/parents?topicParentId=${this.$route.params.id}`,
+  //     `http://localhost:8081/kpdteti/api/topics/publications?topicId=${this.$route.params.id}`
+  //   ]
+  //   try {
+  //         axios.all(link.map((link) => axios.get(link)))
+  //         .then((data) => {this.showPublications(data[1].data),this.showTopics(data[0].data),console.log(data[0].data),console.log(data[1].data)}
+  //         );}
+  //     catch(error){
+  //       //         // handle error
+  //               console.log(error)
+  //       //   // console.log(this.$route.params.id)
+  //       }
       // const res = await axios
       //     .get(`http://localhost:8081/kpdteti/api/topics/publications?topicOrParentId=${this.$route.params.id}`)
       //         // handle success

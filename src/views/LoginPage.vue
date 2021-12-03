@@ -1,21 +1,50 @@
 <template>
   <div>
+    <v-card class="overflow-hidden">
+    <v-app-bar
+        app
+        color="white"
+        scroll-target="#scrolling-techniques-7"
+    >
     <v-container>
-      <v-img
-          max-height="40"
-          max-width="40"
-          class="mr-3"
-          :src="require('../img/Asset1.svg')"
-      ></v-img>
       <v-row>
-        <v-col>
-          <p>KP-DTETI</p><br>
-<!--          <p>Klasifikasi Publikasi DTETI</p>-->
-        </v-col>
+        <v-img
+            max-height="45"
+            max-width="45"
+            class="mr-3 mt-2"
+            :src="require('../img/Asset1.svg')"
+        ></v-img>
+      <v-toolbar-title class="text-left" style="color: rgba(36,35,36,0.89)">
+<!--        <v-row class="text&#45;&#45;secondary text-left">-->
+          <p class="text-left text--secondary pb-0 mb-0 mt-2" >KP-DTETI</p>
+<!--          <v-col class="text&#45;&#45;secondary text-left">-->
+            <p class="py-0 my-0 mb-2 text--secondary" style="font-size: 10px">Sistem Klasifikasi Publikasi DTETI</p>
+<!--          </v-col>-->
+<!--        </v-row>-->
+      </v-toolbar-title>
       </v-row>
+    </v-container>
+    </v-app-bar>
+    </v-card>
+<!--      <v-row>-->
+<!--        <v-col>-->
+<!--          <p>KP-DTETI</p><br>-->
+<!--&lt;!&ndash;          <p>Klasifikasi Publikasi DTETI</p>&ndash;&gt;-->
+<!--        </v-col>-->
+<!--      </v-row>-->
+    <v-sheet
+        rounded
+        class="mx-auto mt-7 pa-1"
+        max-width="560"
+        outlined
+        color="teal darken-2">
       <v-card
-      class="mx-auto">
-        <v-card-title>Login</v-card-title>
+          class="mx-auto pa-7"
+          max-width="550"
+          outlined
+          elevation="0">
+        <v-card-title
+        class="justify-center">Login</v-card-title>
         <form>
             <v-text-field
             v-model="form.email"
@@ -28,10 +57,17 @@
             label="Password"
             filled
             rounded></v-text-field>
-            <v-btn @click="submit">Login</v-btn>
+            <v-btn
+                color="teal darken-2"
+                @click="submit">Login</v-btn>
         </form>
+        <p class="mt-4 mb-0 text--secondary"
+        style="font-size: smaller">Don't Have Account?</p>
+        <router-link
+            class="mt-0 text--secondary"
+            style="font-size: smaller" to="/register">Click here to register!</router-link>
       </v-card>
-    </v-container>
+    </v-sheet>
   </div>
 </template>
 

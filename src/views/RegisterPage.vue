@@ -1,47 +1,69 @@
 <template>
   <div>
-    <v-container>
-      <v-img>
-        max-height="40"
-        max-width="40"
-        class="mr-3"
-        :src="require('../img/Asset1.svg')"
-      </v-img>
-      <v-row>
-        <v-col>
-          <p>KP-DTETI</p>
-        </v-col>
-      </v-row>
-      <v-card>
-        <v-card-title>Register</v-card-title>
+    <v-card class="overflow-hidden">
+      <v-app-bar
+          app
+          color="white"
+          scroll-target="#scrolling-techniques-7"
+      >
+        <v-container>
+          <v-row>
+            <v-img
+                max-height="45"
+                max-width="45"
+                class="mr-3 mt-2"
+                :src="require('../img/Asset1.svg')"
+            ></v-img>
+            <v-toolbar-title class="text-left" style="color: rgba(36,35,36,0.89)">
+              <p class="text-left text--secondary pb-0 mb-0 mt-2" >KP-DTETI</p>
+              <p class="py-0 my-0 mb-2 text--secondary" style="font-size: 10px">Sistem Klasifikasi Publikasi DTETI</p>
+            </v-toolbar-title>
+          </v-row>
+        </v-container>
+      </v-app-bar>
+    </v-card>
+    <v-sheet
+        rounded
+        class="mx-auto mt-7 pa-1"
+        max-width="510"
+        outlined
+        color="teal darken-2">
+      <v-card
+          class="mx-auto pa-7"
+          max-width="500"
+          outlined
+          elevation="0">
+        <v-card-title
+        class="justify-center">Register</v-card-title>
         <form>
-          <p>Name</p>
           <v-text-field
               v-model="name"
+              label="Name"
               filled
               rounded></v-text-field>
-          <p>E-mail</p>
           <v-text-field
               v-model="email"
+              label="Email"
               rules=""
               filled
               rounded></v-text-field>
-          <p>Username</p>
           <v-text-field
               v-model="username"
+              label="Username"
               filled
               rounded></v-text-field>
-          <p>Password</p>
           <v-text-field
               v-model="password"
+              label="Password"
               filled
               rounded></v-text-field>
           <v-btn
+              color="teal darken-2"
               type="submit"
-          >Login</v-btn>
+          >Register</v-btn>
         </form>
       </v-card>
-    </v-container>
+    </v-sheet>
   </div>
 </template>
 

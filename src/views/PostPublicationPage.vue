@@ -190,7 +190,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import MainAppbar from '@/components/MainAppbar';
 import { validationMixin } from 'vuelidate';
 import {required} from 'vuelidate/lib/validators';
@@ -228,7 +227,6 @@ export default {
   }),
 
   computed: {
-    ...mapState(['user']),
     titleErrors() {
       const errors = []
       if (!this.$v.publicationTitle.$dirty) return errors
@@ -329,16 +327,17 @@ export default {
       axios.post('http://localhost:8081/kpdteti/api/xpath/publications', {
         publicationTitle: this.publicationTitle,
         authorIds: this.authorIds,
-        otherAuthors: this.otherAuthors.split(",").map(name => name.trim()),
+        otherAuthors: this.otherAuthors.split,
         publicationDate: this.publicationDate,
         publicationPublisher: this.publicationPublisher,
         publicationAbstract: this.publicationAbstract,
-        userId: this.user.userId
+        userId: 'usr-158b674c-523f-45a5-b28f-4d7239af18cd'
       })
           .then(function (response) {
             console.log(response);
             if(response.status === 200) {
-              this.$router.push('/classification/steps/' + response.data.classification.classificationId);
+              console.log("Redirect euy")
+              this.$router.push('/classification/steps');
             }
           })
           .catch(function (error) {

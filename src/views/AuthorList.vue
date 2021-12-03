@@ -8,30 +8,33 @@
         cols="12"
         v-for="author in authors"
         :key="author.authorName">
-          <v-card
-              class="mx-auto"
-              outlined
-              max-width="700"
-              elevation="4"
-              @click="authorProfile()">
-            <v-list>
-              <v-list-item>
-                <v-avatar
-                    color="teal">
-                  <v-icon
-                      dark>
-                    mdi-account-circle
-                  </v-icon>
-                  <!--                      <v-img></v-img>-->
-                </v-avatar>
-                  <v-list-item-content>
-                    <v-list-item-title
-                    v-text="author.authorName"></v-list-item-title>
-  <!--                  <v-card-title></v-card-title>-->
-                </v-list-item-content>
-              </v-list-item>
-          </v-list>
-          </v-card>
+          <router-link style="text-decoration: none; color: inherit;"
+                       :to="{name: 'author profile',params:{id:author.authorId}}">
+              <v-card
+                  class="mx-auto"
+                  outlined
+                  max-width="700"
+                  elevation="4"
+                  >
+                <v-list>
+                  <v-list-item>
+                    <v-avatar
+                        color="teal">
+                      <v-icon
+                          dark>
+                        mdi-account-circle
+                      </v-icon>
+                      <!--                      <v-img></v-img>-->
+                    </v-avatar>
+                      <v-list-item-content>
+                        <v-list-item-title
+                        v-text="author.authorName"></v-list-item-title>
+      <!--                  <v-card-title></v-card-title>-->
+                    </v-list-item-content>
+                  </v-list-item>
+              </v-list>
+              </v-card>
+          </router-link>
         </v-col>
       </v-row>
     </v-container>
@@ -199,9 +202,9 @@ export default {
     authors: [],
   }),
 method:{
-    authorProfile(){
-      this.$router.push({name:'author profile',params:{}})
-    }
+    // authorProfile(){
+    //   this.$router.push({name:'author profile',params:{}})
+    // }
   // sortAuthors(authors){
   //   return _.orderBy(authors, 'authorName', 'asc');
   // }
