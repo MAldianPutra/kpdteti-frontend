@@ -46,10 +46,17 @@
           <v-data-table
               :headers="headers"
               :items="publications"
+              :pagination.sync="pagination"
+              :loading="loading"
               item-key="publicationId"
               :items-per-page="2"
               class="elevation-1"
           ></v-data-table>
+<!--          <template slot=[items slot-scope="props">-->
+<!--            <td>{{ props.item.publicationTitle }}</td>-->
+<!--            <td class="text-xs-right">{{ props.item.publicationDate }}</td>-->
+<!--            <td class="text-xs-right">{{ props.item.topicDto.topicName }}</td>-->
+<!--          </template>-->
         </v-card>
         </v-col>
       </v-row>
@@ -68,29 +75,38 @@ export default {
   },
   data:()=>({
     authors:[],
-    // return:{
-    //   search:'',
-    //   headers: [
-    //     {
-    //       text: 'Title',
-    //       align: 'start',
-    //       sortable: false,
-    //       value: 'title',
-    //     },
-    //     { text: 'Publication Date', value: 'date' },
-    //     { text: 'Topic', value: 'topic' },
-    //   ],
-    //   publications:[
-    //     {
-    //       title:this.publicationTitle,
-    //       date:this.publicationDate,
-    //       topic:this.Topic,
-    //     }
+    return: {
+      search: '',
+      publications:[],
+      headers: [
+        {
+          text: 'Title',
+          align: 'start',
+          sortable: false,
+          value: 'title',
+        },
+        {text: 'Publication Date', value: 'date'},
+        {text: 'Topic', value: 'topic'},
+      ],
+    }
+
     //   ]}
   }),
-  computed:{
-
+  created() {
+    axios.get(`http://localhost:8081/kpdteti/api/authors/publications?authorId=${this.$route.params.id}`)
+  .then(response=>{
+    this.publications=response.data;
+    console.log(this.publications)
+  })
+  .catch(function (error) {
+      console.log(error);
+    });
   },
+  // computed:{
+  //   headers(){
+  //     return
+  //   }
+  // },
   methods:{
     showAuthorProfile(data){
       this.authors = data
@@ -100,18 +116,27 @@ export default {
     }
   },
   async mounted(){
-    let link = [
-      `http://localhost:8081/kpdteti/api/authors?authorId=${this.$route.params.id}`,
-      `http://localhost:8081/kpdteti/api/authors/publications?authorId=${this.$route.params.id}`
-    ]
     try{
-      axios.all(link.map((link) => axios.get(link)))
-      .then((data) => {this.showAuthorProfile(data[0].data),this.showPublicationList(data[1].data),console.log(data[0].data)}
-      );}
-    catch (error){
+      const res = await axios
+      .get(`http://localhost:8081/kpdteti/api/authors?authorId=${this.$route.params.id}`)
+      this.showAuthorProfile(res.data)
+      console.log(res.data)
+    }catch(error){
       console.log(error)
     }
   },
+  //   let link = [
+  //     `http://localhost:8081/kpdteti/api/authors?authorId=${this.$route.params.id}`,
+  //     `http://localhost:8081/kpdteti/api/authors/publications?authorId=${this.$route.params.id}`
+  //   ]
+  //   try{
+  //     axios.all(link.map((link) => axios.get(link)))
+  //     .then((data) => {this.showAuthorProfile(data[0].data),this.showPublicationList(data[1].data),console.log(data[0].data)}
+  //     );}
+  //   catch (error){
+  //     console.log(error)
+  //   }
+  // },
 }
 </script>
 
