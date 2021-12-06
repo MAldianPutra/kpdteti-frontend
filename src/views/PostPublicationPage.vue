@@ -154,12 +154,15 @@
 
 <!--        file input -->
                 <v-file-input
-                    v-model="savePDF"
+                    v-model="publicationPDF"
+                    ref="upload"
+                    type="file"
+                    @change="onUploadFiles"
                     class="pb-2"
                     required
                     outlined
                     color="cyan darken-2"
-                    accept="file/*"
+                    accept=".pdf"
                     label="File input"
                 ></v-file-input>
 <!--        end of input file -->
@@ -190,6 +193,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import MainAppbar from '@/components/MainAppbar';
 import { validationMixin } from 'vuelidate';
 import {required} from 'vuelidate/lib/validators';
@@ -206,7 +210,7 @@ export default {
     publicationDate: {required},
     publicationPublisher: {required},
     publicationDescription: {required},
-    savePDF: {required},
+    publicationPDF: {required},
   },
 
   components: {
@@ -221,12 +225,13 @@ export default {
     publicationDate: '',
     publicationPublisher: '',
     publicationAbstract: '',
-    savePDF: false,
+    publicationPDF: null,
     topicId:[],
     userId: ''
   }),
 
   computed: {
+    ...mapState(['user']),
     titleErrors() {
       const errors = []
       if (!this.$v.publicationTitle.$dirty) return errors
@@ -273,111 +278,46 @@ export default {
   },
 
   methods: {
-    // postPublication(){
-      // const response = await axios.post('http://localhost:8081/kpdteti/api/publications')
-      // axios.post('http://localhost:8081/kpdteti/api/publications', {
-      //   publicationTitle: this.publicationTitle,
-      //   authorId: this.authorId,
-      //   otherAuthors: this.otherAuthors,
-      //   publicationDate: this.publicationDate,
-      //   publicationPublisher: this.publicationPublisher,
-      //   publicationDescription: this.publicationDescription,
-      //   savePDF: false,
-      //   userId: 'usr-335930d7-026c-453b-9fb5-7d4fc112e3c6'
-      // })
-      //     .then(function (response) {
-      //       console.log(response);
-      //     })
-      //     .catch(function (error) {
-      //       console.log(error);
-      //     });
-    // },
-    //   const publication = publication.stringify ({
-    //     publicationTitle: '',
-    //     authorId: '',
-    //     otherAuthors: '',
-    //     publicationDate: '',
-    //     publicationPublisher: '',
-    //     publicationDescription: '',
-    //     savePDF: false,
-    //     userId: 'usr-335930d7-026c-453b-9fb5-7d4fc112e3c6'
-    //   });
-    //   const res = await axios.post('http://localhost:8081/kpdteti/api/publications', {
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   });
-    //   console.log(res.data.data);
-    //   res.data.headers['Content-Type'];
-    // },
-
-    // }
-    //   });
-    //       console.log(res.data.data);
-      // res.data.headers['Content-Type'];
-    // },
-    // getAuthors(data){
-    //   this.authors = data
-    // },
     remove(item) {
       const index = this.authors.indexOf(item.authorId)
       if (index >= 0) this.authors.splice(index, 1)
     },
-    submit() {
-      axios.post('http://localhost:8081/kpdteti/api/xpath/publications', {
-        publicationTitle: this.publicationTitle,
-        authorIds: this.authorIds,
-        otherAuthors: this.otherAuthors.split,
-        publicationDate: this.publicationDate,
-        publicationPublisher: this.publicationPublisher,
-        publicationAbstract: this.publicationAbstract,
-        userId: 'usr-158b674c-523f-45a5-b28f-4d7239af18cd'
-      })
-          .then(function (response) {
-            console.log(response);
-            if(response.status === 200) {
-              console.log("Redirect euy")
-              this.$router.push('/classification/steps');
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      // axios.post('http://localhost:8081/kpdteti/api/publications',{ params: {
-      //   publicationTitle: this.publicationTitle,
-      //   authorId: this.authorId,
-      //   otherAuthors: this.otherAuthors,
-      //   publicationDate: this.publicationDate,
-      //   publicationPublisher: this.publicationPublisher,
-      //   publicationDescription: this.publicationDescription,
-      //   savePDF: this.savePDF
-      //   }})
-      //     .then(response => this.postPublication = response.data)
-      //     .catch(error => console.error(error));
-      // axios.post('http://localhost:8081/kpdteti/api/publications', {
-      //       publicationTitle:'',
-      //       authorId:'',
-      //       otherAuthors:'',
-      //       publicationDate:'',
-      //       publicationPublisher : '',
-      //       publicationDescription : '',
-      //       savePDF : false
-      //
-      //       })
-      //       .then(function () {
-      //             console.log(this.publicationTitle);
-      //       })
-      //          .catch(function (error) {
-      //            console.log(error);
-      //         });
-      // this.$v.$touch()
-      //     publicationDescription: '',
-      //     savePDF: true,
-      //     userId: 'usr-335930d7-026c-453b-9fb5-7d4fc112e3c6'
-      console.log('publicationTitle:',this.publicationTitle)
-      console.log('authorId:',this.authorIds)
-      console.log('publicationDate:',this.publicationDate)
-      console.log('publicationPublisher:',this.publicationPublisher)
+    onUploadFiles() {
+    },
+    async submit() {
+      try {
+      const data = {
+          publicationTitle: this.publicationTitle,
+          authorIds: this.authorIds,
+          otherAuthors: this.otherAuthors.split(",").map(name => name.trim()),
+          publicationDate: this.publicationDate,
+          publicationPublisher: this.publicationPublisher,
+          publicationAbstract: this.publicationAbstract,
+          userId: this.user.userId
+      }
+
+      const response = await axios.post('http://localhost:8081/kpdteti/api/xpath/publications', data)
+      console.log(response)
+
+      if(response.status === 200) {
+        let formData = new FormData()
+        formData.append('file', this.publicationPDF)
+
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          },
+        };
+        const uploadResponse = await axios.post(`http://localhost:8081/kpdteti/api/publications/upload?id=${response.data.publicationId}`, formData, config)
+        console.log(uploadResponse)
+
+        if(uploadResponse.status === 200) {
+          this.$router.push(`/classification/steps/${response.data.classificationDto.classificationId}`);
+        }
+      }
+      } catch (error) {
+        console.log(error)
+      }
     },
     clear() {
       this.$v.$touch()
@@ -387,7 +327,7 @@ export default {
       this.publicationDate = ''
       this.publicationPublisher = ''
       this.publicationAbstract = ''
-      this.savePDF = false
+      this.publicationPDF = false
     }
   },
 
@@ -396,12 +336,12 @@ export default {
       const res = await axios
           .get("http://localhost:8081/kpdteti/api/authors/all")
       this.authors= res.data
-      // console.log(res.data)
     } catch (error) {
       console.log(error)
     }
   }
 }
+
 </script>
 
 <style scoped>
