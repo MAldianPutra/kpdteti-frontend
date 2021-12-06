@@ -7,13 +7,13 @@
 <!--          <div style="{backgroundImage: url('~@/assets/annie-spratt-5cFwQ-WMcJU-unsplash.jpg')}">-->
 <!--          </div>-->
           <pre class="tab1"></pre>
-          <h1>Selamat Datang di KP-DTETI!</h1><br>
-          <h1>Sistem Klasifikasi Hasil Publikasi DTETI</h1><br>
+          <h1>Welcome to KP-DTETI!</h1><br>
+          <h1>DTETIs Classification Publication Sytem</h1><br>
 <!--          <p>KP-DTETI adalah sistem klasifikasi hasil publikasi.<br>-->
 <!--            Sistem ini-->
 <!--            dapat digunakan oleh mahasiswa,dosen dan tenaga pendidik DTETI FT UGM.</p>-->
           <pre class="tab1"></pre>
-          <h1>Untuk Memulai Klasifikasi klik button di bawah ini!</h1>
+          <h1> To Start Classify, Click This Button!</h1>
           <div class="item">
 
             <router-link
@@ -21,7 +21,7 @@
             tag="v-btn">
             <v-btn
                 rounded
-                color="cyan darken-2"
+                color="teal darken-2"
                 dark
                 elevation="2"
             >
@@ -47,12 +47,14 @@
               md="4"
               v-for="topic in Topics"
               :key="topic.topicId">
-           <router-link :to="{name: 'publication topic',params:{id:topic.topicParentId}}">
+           <router-link
+               style="text-decoration: none; color: inherit;"
+               :to="{name: 'publication topic',params:{id:topic.topicId}}">
             <v-card
                 class="pa-4"
                 outlined
                 rounded-xl
-                color="cyan darken-2"
+                color="teal darken-2"
             >
               {{ topic.topicName }}
             </v-card>

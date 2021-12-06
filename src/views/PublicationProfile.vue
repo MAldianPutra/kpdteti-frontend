@@ -13,10 +13,10 @@
             <p class="font-weight-light">PUBLICATION TITLE</p>
           <v-card-title
           v-text="profiles.publicationTitle"></v-card-title>
-           <v-list
-           v-for="author in profiles.authorDto"
-           :key="author.authorId">
-             <v-list-item-title>{{author.authorName}}</v-list-item-title>
+           <v-list>
+             <v-list-item-title
+                 v-for="author in profiles.authorDto"
+                 :key="author.publicationId">{{author.authorName}}</v-list-item-title>
              <v-list-item-title>{{profiles.otherAuthors}}</v-list-item-title>
              <v-list-item-title>{{profiles.publicationDate}}</v-list-item-title>
            </v-list>
@@ -27,9 +27,7 @@
                 inset
                 width="800"></v-divider>
             <v-card-subtitle>ABSTRACT</v-card-subtitle>
-            <v-card-text>
-              <p>{{profiles.publicationDescription}}</p>
-            </v-card-text>
+            <v-card-text> {{profiles.publicationAbstract}}</v-card-text>
         </v-card>
 <!--      </v-col>-->
     </v-row>
@@ -52,8 +50,8 @@ export default {
     }
   },
   methods:{
-    downloadFile(){
-       axios({
+    downloadFile() {
+      axios({
         url: `http://localhost:8081/kpdteti/api/publications/download?publicationId=${this.$route.params.id}`, // File URL Goes Here
         method: 'GET',
         responseType: 'blob',
@@ -66,9 +64,7 @@ export default {
         document.body.appendChild(publicationUrl);
         publicationUrl.click();
       });
-
-
-    }
+    },
     // showProfile(data){
     //   this.profiles = data
     // }
