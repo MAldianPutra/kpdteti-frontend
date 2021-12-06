@@ -34,11 +34,11 @@
               max-width="1000"
               elevation="4"
               >
-          <v-list>
+          <v-list
+          three-line>
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title
-                v-text="publication.publicationTitle"></v-list-item-title>
+                <p>{{publication.publicationTitle}}</p>
                 <v-divider></v-divider>
                 <v-card-content
                v-for="author in publication.authorDto"

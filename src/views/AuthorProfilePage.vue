@@ -51,12 +51,16 @@
               item-key="publicationId"
               :items-per-page="2"
               class="elevation-1"
-          ></v-data-table>
-<!--          <template slot=[items slot-scope="props">-->
-<!--            <td>{{ props.item.publicationTitle }}</td>-->
-<!--            <td class="text-xs-right">{{ props.item.publicationDate }}</td>-->
-<!--            <td class="text-xs-right">{{ props.item.topicDto.topicName }}</td>-->
-<!--          </template>-->
+              :search="search"
+              @click:row="showPublicationProfile"
+          >
+<!--            <template slot=[items] slot-scope="props">-->
+<!--                          <td  @click="$route.push(`/home/publication-profile/${props.item.publicationId}`)">{{ props.item.publicationTitle }}</td>-->
+<!--                          <td class="text-xs-right">{{ props.item.publicationDate }}</td>-->
+<!--                          <td class="text-xs-right">{{ props.item.topicDto.topicName }}</td>-->
+<!--                        </template>-->
+          </v-data-table>
+
         </v-card>
         </v-col>
       </v-row>
@@ -75,7 +79,6 @@ export default {
   },
   data:()=>({
     authors:[],
-    return: {
       search: '',
       publications:[],
       headers: [
@@ -83,60 +86,83 @@ export default {
           text: 'Title',
           align: 'start',
           sortable: false,
-          value: 'title',
+          value: 'publicationTitle',
         },
-        {text: 'Publication Date', value: 'date'},
-        {text: 'Topic', value: 'topic'},
-      ],
-    }
+        {text: 'Publication Date', value: 'publicationDate'},
+        {text: 'Topic', value: 'topicName'},
+      ]
 
     //   ]}
   }),
-  created() {
-    axios.get(`http://localhost:8081/kpdteti/api/authors/publications?authorId=${this.$route.params.id}`)
-  .then(response=>{
-    this.publications=response.data;
-    console.log(this.publications)
-  })
-  .catch(function (error) {
-      console.log(error);
-    });
-  },
+  // created() {
+  //   axios.get(`http://localhost:8081/kpdteti/api/authors/publications?authorId=${this.$route.params.id}`)
+  // .then(response=>{
+  //   this.publications=response.data;
+  //   console.log(this.publications)
+  // })
+  // .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // },
   // computed:{
   //   headers(){
   //     return
   //   }
   // },
   methods:{
+    showPublicationProfile(value){
+      this.$router.push(`/home/publication-profile/${value.publicationId}`)
+      console.log(value)
+    },
     showAuthorProfile(data){
       this.authors = data
     },
     showPublicationList(data){
-      this.publications = data
+      this.publications = data.map(p => {
+        let topicName = ''
+        for(let i = 0; i < p.topicDto.length; i++) {
+          if(i === 0) {
+            topicName += p.topicDto[i].topicName
+          } else {
+            topicName += ', ' + p.topicDto[i].topicName
+          }
+
+        }
+
+        return {
+          ...p,
+          topicName
+        }
+      })
     }
   },
   async mounted(){
+    // try{
+    //   const res = await axios
+    //   .get(`http://localhost:8081/kpdteti/api/authors?authorId=${this.$route.params.id}`)
+    //   this.showAuthorProfile(res.data)
+    //   console.log(res.data)
+    // }catch(error){
+    //   console.log(error)
+  //   // }
+  // },
+    let links = [
+      `http://localhost:8081/kpdteti/api/authors?authorId=${this.$route.params.id}`,
+      `http://localhost:8081/kpdteti/api/authors/publications?authorId=${this.$route.params.id}`
+    ]
     try{
-      const res = await axios
-      .get(`http://localhost:8081/kpdteti/api/authors?authorId=${this.$route.params.id}`)
-      this.showAuthorProfile(res.data)
-      console.log(res.data)
-    }catch(error){
+      axios.all(links.map((link) => axios.get(link)))
+      .then((data) => {
+        this.showAuthorProfile(data[0].data)
+        this.showPublicationList(data[1].data)
+        console.log(data[0].data)
+        console.log(data[1].data)
+      }
+      );}
+    catch (error){
       console.log(error)
     }
   },
-  //   let link = [
-  //     `http://localhost:8081/kpdteti/api/authors?authorId=${this.$route.params.id}`,
-  //     `http://localhost:8081/kpdteti/api/authors/publications?authorId=${this.$route.params.id}`
-  //   ]
-  //   try{
-  //     axios.all(link.map((link) => axios.get(link)))
-  //     .then((data) => {this.showAuthorProfile(data[0].data),this.showPublicationList(data[1].data),console.log(data[0].data)}
-  //     );}
-  //   catch (error){
-  //     console.log(error)
-  //   }
-  // },
 }
 </script>
 

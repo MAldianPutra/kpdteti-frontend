@@ -15,19 +15,25 @@
           <pre class="tab1"></pre>
           <h1> To Start Classify, Click This Button!</h1>
           <div class="item">
-
-            <router-link
-            to="/classification"
-            tag="v-btn">
-            <v-btn
-                rounded
-                color="teal darken-2"
-                dark
-                elevation="2"
-            >
-             <span>Klasifikasi</span>
-            </v-btn>
-            </router-link>
+            <v-col>
+            <v-text-field
+                hide-details
+                prepend-icon="mdi-magnify"
+                solo
+            ></v-text-field>
+            </v-col>
+<!--            <router-link-->
+<!--            to="/classification"-->
+<!--            tag="v-btn">-->
+<!--            <v-btn-->
+<!--                rounded-->
+<!--                color="teal darken-2"-->
+<!--                dark-->
+<!--                elevation="2"-->
+<!--            >-->
+<!--             <span>Klasifikasi</span>-->
+<!--            </v-btn>-->
+<!--            </router-link>-->
           </div>
         </v-container>
       </section>
