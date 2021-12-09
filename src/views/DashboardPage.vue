@@ -8,20 +8,44 @@
 <!--          </div>-->
           <pre class="tab1"></pre>
           <h1>Welcome to KP-DTETI!</h1><br>
-          <h1>DTETIs Classification Publication Sytem</h1><br>
+          <h1>DTETIs Classification Publication System</h1><br>
 <!--          <p>KP-DTETI adalah sistem klasifikasi hasil publikasi.<br>-->
 <!--            Sistem ini-->
 <!--            dapat digunakan oleh mahasiswa,dosen dan tenaga pendidik DTETI FT UGM.</p>-->
           <pre class="tab1"></pre>
-          <h1> To Start Classify, Click This Button!</h1>
+          <h1> </h1>
           <div class="item">
-            <v-col>
-            <v-text-field
-                hide-details
-                prepend-icon="mdi-magnify"
-                solo
-            ></v-text-field>
-            </v-col>
+            <v-container>
+              <v-row>
+                <v-col
+                cols="12"
+                sm="2"
+               >
+                  <v-select
+                      :items="items"
+                      solo
+                      dense
+                      label="Search Type"
+                      v-model="searchBySelect">
+                  </v-select>
+                </v-col>
+                <v-col
+                cols="12"
+                sm="4">
+                  <v-text-field
+                      hide-details
+                      solo
+                      dense
+                      v-model="searchOnly"
+                      label="Search Publication"
+                  ></v-text-field>
+                    <v-btn
+                        class="mt-1"
+                    @click="search">Search</v-btn>
+                </v-col>
+                </v-row>
+
+            </v-container>
 <!--            <router-link-->
 <!--            to="/classification"-->
 <!--            tag="v-btn">-->
@@ -128,40 +152,55 @@
   // import topicData from '@/json/db.json';
 
   export default {
-  name: "DashboardPage",
-  components: {
-    MainFooter,
-    MainAppbar
+    name: "DashboardPage",
+    components: {
+      MainFooter,
+      MainAppbar
     },
-    data(){
-    return{
-      // Topics: topicData,
-      Topics : []
-      }
-    },
-    methods:{
-    showTopic(data){
-      this.Topics=data
-      }
-    },
-    mounted(){
-      axios
-      .get("http://localhost:8081/kpdteti/api/topics/all")
-          .then((response) =>
-              // handle success
-              this.showTopic(response.data))
-          // this.Topics(response.data))
-          .catch((error) =>
-              // handle error
-              console.log(error))
+    data:()=>({
+      searchOnly:'',
+      items: ['AUTHOR', 'TOPIC', 'TITLE'],
+        // Topics: topicData,
+        Topics: [],
+    }),
+    methods: {
+      showTopic(data) {
+        this.Topics = data
+      },
+      search(){
+        this.$router.push(`/publication/${this.searchBySelect}/${this.searchOnly}`)
+          // axios
+          // .get(`http://localhost:8081/kpdteti/api/publications/search?searchKey=${this.searchOnly}&searchType=${this.searchBySelect}`)
+          //     .then((response) =>{
 
+                  // console.log(response.data)})
+                  // handle success
+                  // this.showTopic(response.data))
+              // this.Topics(response.data))
+              // .catch((error) =>
+                  // handle error
+                  // console.log(error.response))
+
+        },
     },
-    // methods: {
-    //   menujuHalamanLain(id) {
-    //     this.$router.push(`dashboard/detail/${id}`)
-    //   }
-    // }
-  };
+    async mounted() {
+        axios
+        .get("http://localhost:8081/kpdteti/api/topics/all")
+            .then((response) =>
+                // handle success
+                this.showTopic(response.data))
+            // this.Topics(response.data))
+            .catch((error) =>
+                // handle error
+                console.log(error))
+
+      },
+      // methods: {
+      //   menujuHalamanLain(id) {
+      //     this.$router.push(`dashboard/detail/${id}`)
+      //   }
+      // }
+  }
 </script>
 
 <style scoped>

@@ -25,7 +25,13 @@
                 <v-card
                     color="grey lighten-1"
                     class="mb-12"
-                    height="300px"></v-card>
+                    height="300px">
+                 <v-list>
+                   <v-list-item>
+                     <v-list-item-title>{{classifications.classificationDto.classificationReport.concatText}}</v-list-item-title>
+                   </v-list-item>
+                 </v-list>
+                </v-card>
                 <v-btn
                     class="white--text"
                     color="teal darken-1"
@@ -101,12 +107,11 @@ export default {
     MainAppbar,
   },
 
-  data(){
-    return{
+  data:() => ({
+      classifications:[],
       e6:1,
       showSteps : true,
-    }
-  },
+  }),
 
   mounted(){
     axios.get('http://localhost:8081/kpdteti/api/publications?publicationId=' + this.$route.params.id)
