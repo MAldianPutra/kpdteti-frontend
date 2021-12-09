@@ -335,7 +335,7 @@ export default {
     try {
       const res = await axios
           .get("http://localhost:8081/kpdteti/api/authors/all")
-      this.authors= res.data
+      this.authors = res.data
     } catch (error) {
       console.log(error)
     }

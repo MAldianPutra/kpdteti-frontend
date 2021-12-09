@@ -28,7 +28,7 @@
                     height="300px">
                  <v-list>
                    <v-list-item>
-                     <v-list-item-title>{{classifications.classificationDto.classificationReport.concatText}}</v-list-item-title>
+                     <v-list-item-title>{{ publication.classificationDto.classificationReport.concatText }}</v-list-item-title>
                    </v-list-item>
                  </v-list>
                 </v-card>
@@ -108,19 +108,19 @@ export default {
   },
 
   data:() => ({
-      classifications:[],
+      publication:[],
       e6:1,
       showSteps : true,
   }),
 
-  mounted(){
-    axios.get('http://localhost:8081/kpdteti/api/publications?publicationId=' + this.$route.params.id)
-      .then(function (response) {
-        console.log(response.data)
-      })
-      .catch(function (error){
-        console.log(error);
-    });
+  async mounted(){
+    try {
+      const response = await axios.get('http://localhost:8081/kpdteti/api/publications?publicationId=' + this.$route.params.id)
+      console.log(response.data)
+      this.publication = response.data
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
