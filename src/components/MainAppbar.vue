@@ -29,7 +29,7 @@
       >
         <span style="color:rgba(36,35,36,0.89)">{{ menu.title }}</span>
       </v-btn>
-    <v-btn v-if="!$store.state.token" text class="hidden-sm-and-down"  @click="$router.push('/login')">
+    <v-btn v-if="!$store.state.user.token" text class="hidden-sm-and-down"  @click="$router.push('/login')">
       <span style="color:rgba(36,35,36,0.89)">Login</span>
     </v-btn>
     <v-btn v-else text class="hidden-sm-and-down" @click="logout">

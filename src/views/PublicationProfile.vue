@@ -20,9 +20,13 @@
              <v-list-item-title>{{profiles.otherAuthors}}</v-list-item-title>
              <v-list-item-title>{{profiles.publicationDate}}</v-list-item-title>
            </v-list>
-          <v-btn
-          color="teal darken-2"
-          @click="downloadFile()">Download file</v-btn>
+          <a :href="profiles.publicationPath" download>
+            Download file
+          </a>
+<!--          <v-btn-->
+<!--          color="teal darken-2"-->
+<!--          @click="downloadFile()">Download file-->
+<!--          </v-btn>-->
             <v-divider
                 inset
                 width="800"></v-divider>
@@ -51,13 +55,13 @@ export default {
   },
   methods:{
     downloadFile() {
+
       axios({
         url: `http://localhost:8081/kpdteti/api/publications/download?publicationId=${this.$route.params.id}`, // File URL Goes Here
         method: 'GET',
         responseType: 'blob',
       }).then((res) => {
         let file = window.URL.createObjectURL(new Blob([res.data]));
-
         let publicationUrl = document.createElement('x');
         publicationUrl.href = file;
         publicationUrl.setAttribute('download', 'file.pdf');
@@ -65,9 +69,6 @@ export default {
         publicationUrl.click();
       });
     },
-    // showProfile(data){
-    //   this.profiles = data
-    // }
   },
   async mounted(){
     this.downloadFile();

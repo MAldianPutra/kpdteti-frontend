@@ -109,7 +109,7 @@ export default {
   },
 
   mounted(){
-    axios.get('http://localhost:8081/kpdteti/api/publications/' + this.$route.params.id)
+    axios.get('http://localhost:8081/kpdteti/api/publications?publicationId=' + this.$route.params.id)
       .then(function (response) {
         console.log(response.data)
       })

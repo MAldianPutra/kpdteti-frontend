@@ -79,16 +79,16 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(value => value.meta.requiresAuth)) {
-        if (localStorage.getItem('token') == null) {
+        if (JSON.parse(localStorage.getItem('user')).token == null) {
             next({
                 path: '/login',
             });
         } else {
             next();
         }
-    } else if (to.path === '/login' && localStorage.getItem('token') != null) {
+    } else if (to.path === '/login' && JSON.parse(localStorage.getItem('user')).token != null) {
         next({
-            path: '/messages',
+            path: '/home',
             replace: true,
         });
     } else {

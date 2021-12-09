@@ -37,30 +37,24 @@
         class="justify-center">Register</v-card-title>
         <form>
           <v-text-field
-              v-model="name"
-              label="Name"
-              filled
-              rounded></v-text-field>
-          <v-text-field
-              v-model="email"
+              v-model="form.email"
               label="Email"
               rules=""
               filled
               rounded></v-text-field>
           <v-text-field
-              v-model="username"
+              v-model="form.username"
               label="Username"
               filled
               rounded></v-text-field>
           <v-text-field
-              v-model="password"
+              v-model="form.password"
               label="Password"
               filled
               rounded></v-text-field>
           <v-btn
               color="teal darken-2"
-              type="submit"
-          >Register</v-btn>
+              @click="submit">Register</v-btn>
         </form>
       </v-card>
     </v-sheet>
@@ -68,8 +62,46 @@
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate';
+import { required, minLength } from 'vuelidate/lib/validators';
+import axios from "axios";
 export default {
-  name: "RegisterPage"
+  name: "RegisterPage",
+  mixins: [validationMixin],
+
+  data: () => ({
+    form: {
+      email: '',
+      username: '',
+      password: '',
+    }}),
+
+  validations: {
+    email:{required},
+    password:{required, minLength: minLength(5)}
+  },
+
+  methods: {
+    async submit(){
+      try {
+        const data = {
+          userName: this.form.username,
+          userEmail: this.form.email,
+          userPassword: this.form.password
+        }
+
+        const response = await axios.post('http://localhost:8081/kpdteti/api/auth/user', data)
+        console.log(response)
+
+        if(response.status === 200) {
+          this.$router.push('/login')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
 }
 </script>
 

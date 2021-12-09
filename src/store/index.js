@@ -8,22 +8,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     /* eslint-disable no-extra-boolean-cast */
-    token: !!localStorage.getItem("token")
-    ? JSON.parse(localStorage.getItem("token"))
+    user: !!localStorage.getItem('user') ? JSON.parse(localStorage.getItem("user"))
         : null,
-    user: null
   },
   getters: {
     /* eslint-disable no-extra-boolean-cast */
-    isLoggedIn: ({token}) => !!token
+    isLoggedIn: ({user}) => !!user.token
   },
   mutations: {
-    SET_TOKEN: (state, payload) => {
-      state.token = payload;
-    },
-    DELETE_TOKEN: (state) => {
-      state.token = null
-    },
     SET_USER: (state, payload) => {
       state.user = payload
     },
@@ -45,10 +37,9 @@ export default new Vuex.Store({
             { ...payload },
             config
         );
-        const { token, ...user } = response.data;
+        const user = response.data;
         console.log(response.data)
-        localStorage.setItem("token", JSON.stringify(token));
-        commit("SET_TOKEN", token);
+        localStorage.setItem("user", JSON.stringify(user));
         commit("SET_USER", user);
 
         router.push("/");
@@ -57,8 +48,7 @@ export default new Vuex.Store({
       }
     },
     logout({commit}) {
-      localStorage.removeItem('token')
-      commit('DELETE_TOKEN')
+      localStorage.removeItem('user')
       commit('DELETE_USER')
     }
   },

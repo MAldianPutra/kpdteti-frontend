@@ -293,7 +293,7 @@ export default {
           publicationDate: this.publicationDate,
           publicationPublisher: this.publicationPublisher,
           publicationAbstract: this.publicationAbstract,
-          userId: this.user.userId
+          userId: this.$store.state.user.userId
       }
 
       const response = await axios.post('http://localhost:8081/kpdteti/api/xpath/publications', data)
@@ -312,7 +312,7 @@ export default {
         console.log(uploadResponse)
 
         if(uploadResponse.status === 200) {
-          this.$router.push(`/classification/steps/${response.data.classificationDto.classificationId}`);
+          this.$router.push(`/classification/steps/${response.data.publicationId}`);
         }
       }
       } catch (error) {
