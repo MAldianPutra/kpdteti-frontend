@@ -29,38 +29,24 @@
       >
         <span style="color:rgba(36,35,36,0.89)">{{ menu.title }}</span>
       </v-btn>
+<!--    <v-alert-->
+<!--        dismissable-->
+<!--        dense-->
+<!--        type="warning"-->
+<!--        style="position: static"-->
+<!--    >You Need to <strong>Login</strong> First Before Access this Feature.</v-alert>-->
+    <v-btn v-if="!$store.getters.isLoggedIn" text class="hidden-sm-and-down"  @click="$router.push('/classification')">
+      <span style="color:rgba(36,35,36,0.89)">Classification</span>
+    </v-btn>
+    <v-btn v-if="!$store.getters.isLoggedIn" text class="hidden-sm-and-down"  @click="$router.push('/classification')">
+      <span style="color:rgba(36,35,36,0.89)">Database</span>
+    </v-btn>
     <v-btn v-if="!$store.getters.isLoggedIn" text class="hidden-sm-and-down"  @click="$router.push('/login')">
       <span style="color:rgba(36,35,36,0.89)">Login</span>
     </v-btn>
     <v-btn v-else text class="hidden-sm-and-down" @click="logout">
       <span style="color:rgba(36,35,36,0.89)" >Logout</span>
     </v-btn>
-<!--    <v-menu offset-y>-->
-<!--      <template v-slot:activator="{ on }">-->
-<!--        <v-btn-->
-<!--            target="_blank"-->
-<!--            text-->
-<!--            icon-->
-<!--            v-on="on"-->
-<!--            class="hidden-md-and-up"-->
-<!--        >-->
-<!--          <font-awesome-icon icon="ellipsis-v"></font-awesome-icon>-->
-<!--        </v-btn>-->
-<!--      </template>-->
-<!--      <v-list>-->
-<!--        <v-list-item-->
-<!--            v-for="(menu, index) in menus"-->
-<!--            :key="index"-->
-<!--            router :to="menu.route"-->
-<!--        >-->
-<!--          <v-list-item-title style="color: white">-->
-<!--            <router-link :to="menu.route">-->
-<!--              {{ menu.title }}-->
-<!--            </router-link>-->
-<!--          </v-list-item-title>-->
-<!--        </v-list-item>-->
-<!--      </v-list>-->
-<!--    </v-menu>-->
   </v-app-bar>
     <v-sheet
         id="scrolling-techniques-7"
@@ -78,8 +64,7 @@ export default {
     return {
       menus: [
         { title: 'Home', route: '/home' },
-        { title: 'Classification', route: '/classification' },
-        { title: 'Publication', route: '/publication' },
+        // { title: 'Classification', route: '/classification' },
         { title: 'Author', route: '/author' },
       ],
     };
@@ -88,6 +73,9 @@ export default {
     ...mapGetters(["isLoggedIn"])
   },
   methods: {
+    addNotification(){
+
+    },
     ...mapActions(['logout']),
     redirectPage() {
 

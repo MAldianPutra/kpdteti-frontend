@@ -43,6 +43,7 @@ export default new Vuex.Store({
         commit("SET_USER", user);
 
         router.push("/");
+        // dispatch('addNotification');
       } catch (error) {
         console.log("[ Login ]", error);
       }

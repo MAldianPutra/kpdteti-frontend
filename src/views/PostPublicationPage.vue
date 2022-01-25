@@ -16,6 +16,7 @@
             class="mx-auto pa-1"
             max-width="800"
             outlined
+            elevation="12"
             color="cyan darken-2">
           <v-card
             class="mx-auto pa-7"

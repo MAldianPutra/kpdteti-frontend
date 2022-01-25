@@ -10,9 +10,9 @@
             class="mx-auto"
             max-width="1000"
             elevation="2">
-            <p class="font-weight-light">PUBLICATION TITLE</p>
+<!--            <p class="font-weight-light">PUBLICATION TITLE</p>-->
           <v-card-title
-          v-text="profiles.publicationTitle"></v-card-title>
+          style="text-align: center">{{profiles.publicationTitle}}</v-card-title>
            <v-list>
              <v-list-item-title
                  v-for="author in profiles.authorDto"
@@ -31,7 +31,8 @@
                 inset
                 width="800"></v-divider>
             <v-card-subtitle>ABSTRACT</v-card-subtitle>
-            <v-card-text> {{profiles.publicationAbstract}}</v-card-text>
+            <v-card-text
+            style="text-align: justify"> {{profiles.publicationAbstract}}</v-card-text>
         </v-card>
 <!--      </v-col>-->
     </v-row>

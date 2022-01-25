@@ -78,6 +78,11 @@ const routes = [
         name: 'register',
         component: () => import(/* webpackChunkName: "publication topic" */'../views/RegisterPage.vue'),
     },
+    {
+        path: '/database',
+        name: 'database',
+        component: () => import(/* webpackChunkName: "publication topic" */'../views/Database.vue'),
+    },
 ];
 
 const router = new VueRouter({
