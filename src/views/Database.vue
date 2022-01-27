@@ -136,7 +136,7 @@ export default {
     deleteData() {
       console.log('deleteData', this.itemToDelete)
       axios
-          .delete(`http://localhost:8081/kpdteti/api/admin/topics?topicId=${this.itemToDelete.topicId}}`);
+          .delete(`http://localhost:8081/kpdteti/api/admin/topics?topicId=${this.itemToDelete.topicId}`);
       const index = this.topic.indexOf(this.itemToDelete)
       this.topic.splice(index, 1)
       this.dialogDelete = false
