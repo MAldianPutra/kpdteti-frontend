@@ -71,9 +71,57 @@
                     :items-per-page="5"
                     class="elevation-1"
                 >
-<!--                  <template v-slot:item.delete="props">-->
-<!--                    <v-btn class="" color="error">-->
-<!--                      <v-icon>mdi-delete</v-icon>-->
+<!--                  <template>-->
+<!--                    <v-row justify="center">-->
+<!--                      <v-dialog-->
+<!--                          v-model="dialog"-->
+<!--                          persistent-->
+<!--                          max-width="290"-->
+<!--                      >-->
+<!--                        <template v-slot:activator="{ on, attrs }">-->
+<!--                          <v-btn-->
+<!--                              color="primary"-->
+<!--                              dark-->
+<!--                              v-bind="attrs"-->
+<!--                              v-on="on"-->
+<!--                          >-->
+<!--                            Open Dialog-->
+<!--                          </v-btn>-->
+<!--                        </template>-->
+<!--                        <v-card>-->
+<!--                          <v-card-title class="text-h5">-->
+<!--                            Use Google's location service?-->
+<!--                          </v-card-title>-->
+<!--                          <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>-->
+<!--                          <v-card-actions>-->
+<!--                            <v-spacer></v-spacer>-->
+<!--                            <v-btn-->
+<!--                                color="green darken-1"-->
+<!--                                text-->
+<!--                                @click="dialog = false"-->
+<!--                            >-->
+<!--                              Disagree-->
+<!--                            </v-btn>-->
+<!--                            <v-btn-->
+<!--                                color="green darken-1"-->
+<!--                                text-->
+<!--                                @click="dialog = false"-->
+<!--                            >-->
+<!--                              Agree-->
+<!--                            </v-btn>-->
+<!--                          </v-card-actions>-->
+<!--                        </v-card>-->
+<!--                      </v-dialog>-->
+<!--                    </v-row>-->
+<!--                  </template>-->
+                  <template slot="item.delete" slot-scope="props">
+                    <v-btn class="mx-2" icon @click="() => delete(props.item)">
+                      <v-icon dark>mdi-delete</v-icon>
+                    </v-btn>
+                  </template>
+<!--                  <template slot="item.edit" slot-scope="props">-->
+<!--                    <v-btn class="mx-2" icon @click="() => edit(props.item)">-->
+<!--                      <v-icon dark>mdi-pencil</v-icon>-->
 <!--                    </v-btn>-->
 <!--                  </template>-->
                 </v-data-table>
@@ -103,6 +151,14 @@ export default {
           align: 'start',
           sortable: false,
           value: 'topicName'},
+        {
+          text:'',
+          value:'delete'
+        },
+        {
+          text:'',
+          value:'edit'
+        }
         // {text:'',value:'action'}
       ],
 
@@ -110,7 +166,13 @@ export default {
   methods:{
     showTopic(data) {
       this.topic=data
-    }
+    },
+    delete(item) {
+      this.topic = this.items.filter((d) => d.id !== item.id);
+    },
+    // edit(item){
+    //   this.topic =
+    // }
   },
   async mounted() {
     axios
