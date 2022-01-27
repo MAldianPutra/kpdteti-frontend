@@ -72,13 +72,22 @@
                     class="elevation-1"
                 >
 <!--                  <template>-->
-<!--                    <v-row justify="center">-->
-<!--                      <v-dialog-->
-<!--                          v-model="dialog"-->
-<!--                          persistent-->
-<!--                          max-width="290"-->
-<!--                      >-->
-<!--                        <template v-slot:activator="{ on, attrs }">-->
+                    <v-row justify="center">
+                      <v-dialog
+                          v-model="dialog"
+                          persistent
+                          max-width="290"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+<!--                          <template slot="item.delete" slot-scope="props">-->
+                            <v-btn
+                                v-bind="attrs"
+                                v-on="on"
+                                class="mx-2">
+                              <v-icon dark>mdi-delete</v-icon>
+                            </v-btn>
+                          </template>
+<!--                        </template>-->
 <!--                          <v-btn-->
 <!--                              color="primary"-->
 <!--                              dark-->
@@ -88,34 +97,35 @@
 <!--                            Open Dialog-->
 <!--                          </v-btn>-->
 <!--                        </template>-->
-<!--                        <v-card>-->
-<!--                          <v-card-title class="text-h5">-->
-<!--                            Use Google's location service?-->
-<!--                          </v-card-title>-->
-<!--                          <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>-->
-<!--                          <v-card-actions>-->
-<!--                            <v-spacer></v-spacer>-->
-<!--                            <v-btn-->
-<!--                                color="green darken-1"-->
-<!--                                text-->
-<!--                                @click="dialog = false"-->
-<!--                            >-->
-<!--                              Disagree-->
-<!--                            </v-btn>-->
-<!--                            <v-btn-->
-<!--                                color="green darken-1"-->
-<!--                                text-->
-<!--                                @click="dialog = false"-->
-<!--                            >-->
-<!--                              Agree-->
-<!--                            </v-btn>-->
-<!--                          </v-card-actions>-->
-<!--                        </v-card>-->
-<!--                      </v-dialog>-->
-<!--                    </v-row>-->
-<!--                  </template>-->
+                        <v-card>
+                          <v-card-title class="text-h5">
+                            Are you sure you want to delete this data?
+                          </v-card-title>
+                          <v-card-text>If you choose Yes, data will be permanently deleted</v-card-text>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                color="green darken-1"
+                                text
+                                @click="dialog = false"
+                            >
+                              Yes
+                            </v-btn>
+                            <v-btn
+                                color="green darken-1"
+                                text
+                                @click="dialog = false"
+                            >
+                              No
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                    </v-row>
+
                   <template slot="item.delete" slot-scope="props">
-                    <v-btn class="mx-2" icon @click="() => delete(props.item)">
+                    <v-btn
+                        slot="activator" class="mx-2" icon @click="() => delete(props.item)">
                       <v-icon dark>mdi-delete</v-icon>
                     </v-btn>
                   </template>
@@ -145,6 +155,7 @@ export default {
   },
   data:()=>({
       search: '',
+      dialog:false,
       topic: [],
       headers: [
         {text: 'Name',
@@ -167,9 +178,10 @@ export default {
     showTopic(data) {
       this.topic=data
     },
-    delete(item) {
-      this.topic = this.items.filter((d) => d.id !== item.id);
-    },
+
+    // delete(item) {
+    //   this.topic = this.items.filter((d) => d.id !== item.id);
+    // },
     // edit(item){
     //   this.topic =
     // }
