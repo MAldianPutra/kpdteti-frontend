@@ -52,7 +52,7 @@
         <v-col>
           <v-btn>Add Data</v-btn>
           <v-row>
-              <v-card
+            <v-card
               class="mt-5">
                 <v-card-title>
                   <v-text-field
@@ -63,6 +63,7 @@
                       hide-details
                   ></v-text-field>
                 </v-card-title>
+
                 <v-data-table
                     :headers="headers"
                     :items="topic"
@@ -71,69 +72,44 @@
                     :items-per-page="5"
                     class="elevation-1"
                 >
-<!--                  <template>-->
-                    <v-row justify="center">
-                      <v-dialog
-                          v-model="dialog"
-                          persistent
-                          max-width="290"
-                      >
-                        <template v-slot:activator="{ on, attrs }">
-<!--                          <template slot="item.delete" slot-scope="props">-->
-                            <v-btn
-                                v-bind="attrs"
-                                v-on="on"
-                                class="mx-2">
-                              <v-icon dark>mdi-delete</v-icon>
-                            </v-btn>
-                          </template>
-<!--                        </template>-->
-<!--                          <v-btn-->
-<!--                              color="primary"-->
-<!--                              dark-->
-<!--                              v-bind="attrs"-->
-<!--                              v-on="on"-->
-<!--                          >-->
-<!--                            Open Dialog-->
-<!--                          </v-btn>-->
-<!--                        </template>-->
-                        <v-card>
-                          <v-card-title class="text-h5">
-                            Are you sure you want to delete this data?
-                          </v-card-title>
-                          <v-card-text>If you choose Yes, data will be permanently deleted</v-card-text>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                color="green darken-1"
-                                text
-                                @click="dialog = false"
-                            >
-                              Yes
-                            </v-btn>
-                            <v-btn
-                                color="green darken-1"
-                                text
-                                @click="dialog = false"
-                            >
-                              No
-                            </v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-dialog>
-                    </v-row>
-
                   <template slot="item.delete" slot-scope="props">
-                    <v-btn
-                        slot="activator" class="mx-2" icon @click="() => delete(props.item)">
-                      <v-icon dark>mdi-delete</v-icon>
-                    </v-btn>
+                    <v-dialog
+                        v-model="dialog">
+
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            class="mx-2"
+                            v-bind="attrs"
+                            v-on="on"
+                            icon @click="() => delete(props.item)">
+                          <v-icon dark>mdi-delete</v-icon>
+                        </v-btn>
+                      </template>
+
+                      <v-card>
+                        <v-card-title class="text-h5">
+                          Are you sure you want to delete this data?
+                        </v-card-title>
+
+                        <v-card-text>
+                          If you choose Yes, data will be permanently deleted
+                        </v-card-text>
+
+                        <v-divider></v-divider>
+
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn
+                              color="green darken-1"
+                              text
+                              @click="dialog = false"
+                          >
+                            Yes
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
                   </template>
-<!--                  <template slot="item.edit" slot-scope="props">-->
-<!--                    <v-btn class="mx-2" icon @click="() => edit(props.item)">-->
-<!--                      <v-icon dark>mdi-pencil</v-icon>-->
-<!--                    </v-btn>-->
-<!--                  </template>-->
                 </v-data-table>
               </v-card>
           </v-row>
