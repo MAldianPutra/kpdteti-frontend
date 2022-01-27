@@ -72,45 +72,25 @@
                     :items-per-page="5"
                     class="elevation-1"
                 >
-                  <template slot="item.delete" slot-scope="props">
-                    <v-dialog
-                        v-model="dialog">
-
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                            class="mx-2"
-                            v-bind="attrs"
-                            v-on="on"
-                            icon @click="() => delete(props.item)">
-                          <v-icon dark>mdi-delete</v-icon>
-                        </v-btn>
-                      </template>
-
-                      <v-card>
-                        <v-card-title class="text-h5">
-                          Are you sure you want to delete this data?
-                        </v-card-title>
-
-                        <v-card-text>
-                          If you choose Yes, data will be permanently deleted
-                        </v-card-text>
-
-                        <v-divider></v-divider>
-
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn
-                              color="green darken-1"
-                              text
-                              @click="dialog = false"
-                          >
-                            Yes
-                          </v-btn>
-                        </v-card-actions>
-                      </v-card>
-                    </v-dialog>
+                  <template
+                  v-slot:item.actions="{item}">
+                    <v-icon
+                    @click="showDialog(item)">mdi-delete</v-icon>
                   </template>
                 </v-data-table>
+
+              <v-dialog
+              v-model="dialogDelete"
+              max-width="600px">
+                <v-card>
+                  <v-card-title>Are You Sure You Want To Delete This Data?</v-card-title>
+                  <v-card-text>If You Choose To Delete, Data Will Be Permanently Deleted</v-card-text>
+                  <v-card-actions>
+                    <v-btn color="primary" text @click="dialogDelete = false">No</v-btn>
+                    <v-btn color="primary" text @click="deleteData()">Yes</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
               </v-card>
           </v-row>
         </v-col>
@@ -132,7 +112,8 @@ export default {
   },
   data:()=>({
       search: '',
-      dialog:false,
+      dialogDelete:false,
+      itemToDelete:{},
       topic: [],
       headers: [
         {text: 'Name',
@@ -140,13 +121,10 @@ export default {
           sortable: false,
           value: 'topicName'},
         {
-          text:'',
-          value:'delete'
+          text:'Action',
+          value:'actions',
+          sortable:false
         },
-        {
-          text:'',
-          value:'edit'
-        }
         // {text:'',value:'action'}
       ],
 
@@ -155,13 +133,18 @@ export default {
     showTopic(data) {
       this.topic=data
     },
-
-    // delete(item) {
-    //   this.topic = this.items.filter((d) => d.id !== item.id);
-    // },
-    // edit(item){
-    //   this.topic =
-    // }
+    deleteData() {
+      console.log('deleteData', this.itemToDelete)
+      axios
+          .delete(`http://localhost:8081/kpdteti/api/admin/topics?topicId=${this.itemToDelete.topicId}}`);
+      const index = this.topic.indexOf(this.itemToDelete)
+      this.topic.splice(index, 1)
+      this.dialogDelete = false
+    },
+    showDialog(item) {
+      this.itemToDelete = item
+      this.dialogDelete = !this.dialogDelete
+    },
   },
   async mounted() {
     axios
