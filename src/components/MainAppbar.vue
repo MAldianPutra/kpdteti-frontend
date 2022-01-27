@@ -29,26 +29,20 @@
       >
         <span style="color:rgba(36,35,36,0.89)">{{ menu.title }}</span>
       </v-btn>
-<!--    <v-alert-->
-<!--        dismissable-->
-<!--        dense-->
-<!--        type="warning"-->
-<!--        style="position: static"-->
-<!--    >You Need to <strong>Login</strong> First Before Access this Feature.</v-alert>-->
     <v-btn v-if="$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/classification')">
       <span style="color:rgba(36,35,36,0.89)">Classification</span>
     </v-btn>
-    <v-btn v-if="$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/classification')">
+    <v-btn v-if="$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/database')">
       <span style="color:rgba(36,35,36,0.89)">Database</span>
     </v-btn>
-    <v-btn v-if="!$store.getters.isLoggedIn && !$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/login')">
-      <span style="color:rgba(36,35,36,0.89)">Login</span>
-    </v-btn>
-    <v-btn v-if="!$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/author')">
+    <v-btn v-if="!$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down" @click="$router.push('/author')">
       <span style="color:rgba(36,35,36,0.89)">Author</span>
     </v-btn>
-    <v-btn v-else text class="hidden-sm-and-down" @click="logout">
-      <span style="color:rgba(36,35,36,0.89)" >Logout</span>
+    <v-btn v-if="$store.getters.isLoggedInAsUser || $store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down" @click="logout" >
+      <span style="color:rgba(36,35,36,0.89)">Logout</span>
+    </v-btn>
+    <v-btn v-else text class="hidden-sm-and-down" @click="$router.push('/login')">
+      <span style="color:rgba(36,35,36,0.89)" >Login</span>
     </v-btn>
   </v-app-bar>
     <v-sheet
@@ -67,12 +61,11 @@ export default {
     return {
       menus: [
         { title: 'Home', route: '/home' },
-        // { title: 'Author', route: '/author' },
       ],
     };
   },
   computed: {
-    ...mapGetters(["isLoggedIn"]),
+    ...mapGetters(["isLoggedInAsUser"]),
     ...mapGetters(["isLoggedInAsAdmin"])
   },
   methods: {

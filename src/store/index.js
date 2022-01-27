@@ -13,8 +13,8 @@ export default new Vuex.Store({
   },
   getters: {
     /* eslint-disable no-extra-boolean-cast */
-    isLoggedIn: ({ user }) => !!user && !!user.token,
-    isLoggedInAsAdmin: ({ user }) => !!user && !!user.token && user.isAdmin
+    isLoggedInAsUser: ({ user }) => !!user && !!user.token,
+    isLoggedInAsAdmin: ({ user }) => !!user && !!user.token && !!user.isAdmin
   },
   mutations: {
     SET_USER: (state, payload) => {
