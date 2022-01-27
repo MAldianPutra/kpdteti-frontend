@@ -48,22 +48,39 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-card>
-        <v-card-title>
-          <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="Search"
-              single-line
-              hide-details
-          ></v-text-field>
-        </v-card-title>
-        <v-data-table
-            :headers="headers"
-            :items="desserts"
-            :search="search"
-        ></v-data-table>
-      </v-card>
+      <v-container>
+        <v-col>
+          <v-btn>Add Data</v-btn>
+          <v-row>
+              <v-card
+              class="mt-5">
+                <v-card-title>
+                  <v-text-field
+                      v-model="search"
+                      append-icon="mdi-magnify"
+                      label="Search"
+                      single-line
+                      hide-details
+                  ></v-text-field>
+                </v-card-title>
+                <v-data-table
+                    :headers="headers"
+                    :items="topic"
+                    :search="search"
+                    item-key="topicId"
+                    :items-per-page="5"
+                    class="elevation-1"
+                >
+<!--                  <template v-slot:item.delete="props">-->
+<!--                    <v-btn class="" color="error">-->
+<!--                      <v-icon>mdi-delete</v-icon>-->
+<!--                    </v-btn>-->
+<!--                  </template>-->
+                </v-data-table>
+              </v-card>
+          </v-row>
+        </v-col>
+      </v-container>
     </v-container>
   </v-content>
 
@@ -71,17 +88,40 @@
 
 <script>
 import MainAppbar from '@/components/MainAppbar.vue';
+import axios from 'axios';
+
 export default {
   name: "Database",
   components:{
     MainAppbar,
   },
   data:()=>({
-    search:'',
-    headers:[
+      search: '',
+      topic: [],
+      headers: [
+        {text: 'Name',
+          align: 'start',
+          sortable: false,
+          value: 'topicName'},
+        // {text:'',value:'action'}
+      ],
 
-    ]
   }),
+  methods:{
+    showTopic(data) {
+      this.topic=data
+    }
+  },
+  async mounted() {
+    axios
+        .get("http://localhost:8081/kpdteti/api/topics/all")
+        .then((response) =>
+            // handle success
+            this.showTopic(response.data))
+        .catch((error) =>
+            // handle error
+            console.log(error))
+  },
 }
 </script>
 
