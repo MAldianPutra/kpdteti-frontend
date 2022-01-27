@@ -41,7 +41,7 @@
     <v-btn v-if="$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/classification')">
       <span style="color:rgba(36,35,36,0.89)">Database</span>
     </v-btn>
-    <v-btn v-if="!$store.getters.isLoggedIn" text class="hidden-sm-and-down"  @click="$router.push('/login')">
+    <v-btn v-if="!$store.getters.isLoggedIn && !$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/login')">
       <span style="color:rgba(36,35,36,0.89)">Login</span>
     </v-btn>
     <v-btn v-if="!$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/author')">
@@ -72,7 +72,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["isLoggedIn"])
+    ...mapGetters(["isLoggedIn"]),
+    ...mapGetters(["isLoggedInAsAdmin"])
   },
   methods: {
     addNotification(){
