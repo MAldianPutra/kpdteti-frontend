@@ -79,9 +79,19 @@ const routes = [
         component: () => import(/* webpackChunkName: "publication topic" */'../views/RegisterPage.vue'),
     },
     {
-        path: '/database',
-        name: 'database',
+        path: '/database/topics',
+        name: 'topic database',
         component: () => import(/* webpackChunkName: "publication topic" */'../views/Database.vue'),
+    },
+    {
+        path: '/database/authors',
+        name: 'authors database',
+        component: () => import(/* webpackChunkName: "publication topic" */'../views/AuthorDatabase.vue'),
+    },
+    {
+        path: '/database/publications',
+        name: 'publications database',
+        component: () => import(/* webpackChunkName: "publication topic" */'../views/PublicationDatabase.vue'),
     },
 ];
 

@@ -10,7 +10,8 @@
         <v-col
         cols="3">
           <v-card
-          class="pl-5">
+          class="pl-5"
+          color="amber lighten-1">
             <v-avatar
             tile>
             <v-img
@@ -23,7 +24,8 @@
         <v-col
         cols="3">
           <v-card
-          class="mx-auto">
+          class="mx-auto"
+          @click="$router.push('/database/authors')">
             <v-avatar
             tile>
             <v-img
@@ -37,7 +39,8 @@
         <v-col
         cols="3">
           <v-card
-          class="mx-auto">
+          class="mx-auto"
+          @click="$router.push('/database/publications')">
             <v-avatar
             tile>
             <v-img
@@ -50,10 +53,49 @@
       </v-row>
       <v-container>
         <v-col>
-          <v-btn>Add Data</v-btn>
+          <v-dialog
+              v-model="dialogSubmit"
+              max-width="600px">
+
+            <template v-slot:activator="{ on }">
+              <v-col>
+                <v-row>
+                  <v-btn v-on="on">Add Data</v-btn>
+                </v-row>
+              </v-col>
+            </template>
+
+
+            <v-card
+                class="mx-auto pa-7"
+                outlined
+                elevation="0">
+              <v-card-title>Input Topic</v-card-title>
+              <form>
+                <v-text-field
+                    v-model="topicLabel"
+                    color="cyan darken-2"
+                    outlined
+                    label="Label( Number )"
+                    required></v-text-field>
+                <v-text-field
+                    v-model="topicName"
+                    color="cyan darken-2"
+                    outlined
+                    label="Topic Name"
+                    required></v-text-field>
+              </form>
+              <v-card-actions>
+<!--                <v-btn color="primary" text @click="dialogDelete = false">No</v-btn>-->
+                <v-btn color="primary" text @click="submitForm">Submit</v-btn>
+              </v-card-actions>
+            </v-card>
+
+          </v-dialog>
+
           <v-row>
             <v-card
-              class="mt-5">
+              class="mt-5 mx-auto">
                 <v-card-title>
                   <v-text-field
                       v-model="search"
@@ -104,17 +146,26 @@
 <script>
 import MainAppbar from '@/components/MainAppbar.vue';
 import axios from 'axios';
+import {required} from 'vuelidate/lib/validators';
 
 export default {
   name: "Database",
   components:{
     MainAppbar,
   },
+
+  validations: {
+    topicLabel: {required},
+    topicName: {required},
+  },
   data:()=>({
       search: '',
       dialogDelete:false,
+      dialogSubmit:false,
       itemToDelete:{},
       topic: [],
+      topicLabel:'',
+      topicName:'',
       headers: [
         {text: 'Name',
           align: 'start',
@@ -144,6 +195,19 @@ export default {
     showDialog(item) {
       this.itemToDelete = item
       this.dialogDelete = !this.dialogDelete
+    },
+   async submitForm(){
+      try{
+        const data ={
+          topicLabel: this.topicLabel,
+          topicName: this.topicName
+        }
+
+        const response = await axios.post('http://localhost:8081/kpdteti/api/admin/topics', data)
+        console.log(response)
+      }catch (error) {
+        console.log(error)
+      }
     },
   },
   async mounted() {
