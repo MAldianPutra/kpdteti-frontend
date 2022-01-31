@@ -61,26 +61,6 @@
                     </div>
                   </v-expand-transition>
                   </v-card>
-
-<!--                  <v-card-->
-<!--                  color="teal lighten-2"-->
-<!--                  class="mb-12">-->
-<!--                  <v-card-title-->
-<!--                  style="font-size: medium">Step 3 : Lemmatized Text</v-card-title>-->
-<!--                  <v-btn-->
-<!--                      icon-->
-<!--                      @click="showStep3=!showStep3">-->
-<!--                    <v-icon-->
-<!--                        style="position: relative">{{ showStep3 ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon></v-btn>-->
-<!--                  <v-expand-transition>-->
-<!--                    <div v-show="showStep3">-->
-<!--                      <v-divider></v-divider>-->
-
-<!--                      <v-card-text-->
-<!--                          style="font-size: 11px;text-align: justify">{{ publication.classificationDto.classificationReport.lemmatizedText }}</v-card-text>-->
-<!--                    </div>-->
-<!--                  </v-expand-transition>-->
-<!--                  </v-card>-->
                 <v-btn
                     class="white--text"
                     color="teal darken-1"
@@ -89,7 +69,6 @@
                   Continue
                 </v-btn>
               </v-stepper-content>
-
 
               <v-stepper-step
                   color="amber darken-2"
@@ -106,50 +85,6 @@
                   :items="items"
                   class="elevation-1">
                   </v-data-table>
-<!--                  <v-card-title-->
-<!--                  style="font-size: small"-->
-<!--                  class="mb-0">Probability of Computer System Organization Topic</v-card-title>-->
-<!--                  <v-card-text-->
-<!--                  class="mb-0">-->
-<!--                  {{publication.classificationDto.predictProbability["probability(0)"] }}</v-card-text>-->
-<!--                  <v-card-title-->
-<!--                      style="font-size: small"-->
-<!--                  class="mb-0">Probability of Networks Topic</v-card-title>-->
-<!--                  <v-card-text-->
-<!--                  class="mb-0">-->
-<!--                    {{publication.classificationDto.predictProbability["probability(1)"]}}</v-card-text>-->
-<!--                  <v-card-title-->
-<!--                      style="font-size: small">Probability of Software and Its Engineering Topic</v-card-title>-->
-<!--                  <v-card-text>-->
-<!--                    {{publication.classificationDto.predictProbability["probability(2)"]}}</v-card-text>-->
-<!--                  <v-card-title-->
-<!--                      style="font-size: small">Probability of Theory of Computation Topic</v-card-title>-->
-<!--                  <v-card-text>-->
-<!--                    {{publication.classificationDto.predictProbability["probability(3)"]}}</v-card-text>-->
-<!--                  <v-card-title-->
-<!--                      style="font-size: small">Probability of Mathematics of Computing Topic</v-card-title>-->
-<!--                  <v-card-text>-->
-<!--                    {{publication.classificationDto.predictProbability["probability(4)"]}}</v-card-text>-->
-<!--                  <v-card-title-->
-<!--                      style="font-size: small">Probability of Information System Topic</v-card-title>-->
-<!--                  <v-card-text>-->
-<!--                    {{publication.classificationDto.predictProbability["probability(5)"]}}</v-card-text>-->
-<!--                  <v-card-title-->
-<!--                      style="font-size: small">Probability of Security and Privacy Topic</v-card-title>-->
-<!--                  <v-card-text>-->
-<!--                    {{publication.classificationDto.predictProbability["probability(6)"]}}</v-card-text>-->
-<!--                  <v-card-title-->
-<!--                      style="font-size: small">Probability of Human-centered Computing Topic</v-card-title>-->
-<!--                  <v-card-text>-->
-<!--                    {{publication.classificationDto.predictProbability["probability(7)"]}}</v-card-text>-->
-<!--                  <v-card-title-->
-<!--                      style="font-size: small">Probability of Computing Methodologies Topic</v-card-title>-->
-<!--                  <v-card-text>-->
-<!--                    {{publication.classificationDto.predictProbability["probability(8)"]}}</v-card-text>-->
-<!--                  <v-card-title-->
-<!--                      style="font-size: small">Probability of Applied Computing Topic</v-card-title>-->
-<!--                  <v-card-text>-->
-<!--                    {{publication.classificationDto.predictProbability["probability(9)"]}}</v-card-text>-->
                 </v-card>
                 <v-btn
                     class="white--text"
@@ -170,53 +105,9 @@
 
               <v-stepper-step
                   color="amber darken-2"
-                  step="3">Result</v-stepper-step>
+                  step="3">Result
+              </v-stepper-step>
               <v-stepper-content step="3">
-                <v-card
-                    color="grey lighten-1"
-                    class="mb-12"
-                    height="300px">
-                 <v-list>
-                   <v-list-item>
-                     <v-col
-                     >
-                     <v-list-item-title
-                     class="mb-4"
-                     style="text-align: left">Topic List</v-list-item-title>
-                     <v-list-item-title
-                     class="mb-2"
-                     style="text-align: left">Label 0 : Computer System Organization </v-list-item-title>
-                     <v-list-item-title
-                     class="mb-2"
-                     style="text-align: left">Label 1 : Networks</v-list-item-title>
-                     <v-list-item-title
-                     class="mb-2"
-                     style="text-align: left">Label 2 : Software and Its Engineering</v-list-item-title>
-                     <v-list-item-title
-                     class="mb-2"
-                     style="text-align: left">Label 3 : Theory of Computation</v-list-item-title>
-                     <v-list-item-title
-                     class="mb-2"
-                     style="text-align: left">Label 4 : Mathematics of Computing</v-list-item-title>
-                     <v-list-item-title
-                     class="mb-2"
-                     style="text-align: left">Label 5 : Information System</v-list-item-title>
-                     <v-list-item-title
-                     class="mb-2"
-                     style="text-align: left">Label 6 : Security and Privacy</v-list-item-title>
-                     <v-list-item-title
-                     class="mb-2"
-                     style="text-align: left">Label 7 : Human-centered Computing</v-list-item-title>
-                     <v-list-item-title
-                     class="mb-2"
-                     style="text-align: left">Label 8 : Computing Methodologies</v-list-item-title>
-                     <v-list-item-title
-                     class="mb-2"
-                     style="text-align: left">Label 9 : Applied Computing</v-list-item-title>
-                     </v-col>
-                   </v-list-item>
-                 </v-list>
-                </v-card>
                 <v-card
                     color="grey lighten-1"
                     class="mb-12 mt-8"
@@ -224,8 +115,7 @@
                   <v-card-title
                   style="font-size: medium">Topic of the Publication is </v-card-title>
                   <p
-                  style="font-size: medium;color: rgba(17,147,97,0.89)">
-                  Label {{publication.classificationDto.predictResults}}</p>
+                  style="font-size: medium;color: rgba(17,147,97,0.89)"> {{publication.topicDto[0].topicName}}</p>
                 </v-card>
                 <v-btn
                     class="white--text"
@@ -283,19 +173,11 @@ export default {
       showStep3:false,
   }),
 
-  filters:{
-      percent(probability) {
-        if (probability < 1) {
-          return probability * 100 + "%";
-        }
-        return 0;
-      }
-  },
   methods:{
     done(){
       this.$router.push(`/home`)
     },
-    showData(data){
+    showProbabilityData(data){
       this.items = data
     },
     showPublication(data){
@@ -307,14 +189,18 @@ export default {
         .get(`http://localhost:8081/kpdteti/api/publications?publicationId=` + this.$route.params.id)
         .then((response) =>{
           // handle success
-          const probabilityData = response.data.map(data => {
-            // const { classificationDto } = data
-            // const topicName = classificationDto.topicProbability.keys()
+          this.showPublication(response.data)
 
-            return {data}
-          })
-          this.showData(probabilityData)
-          this.showPublication(response.data)})
+          const probabilityData = Object.entries(response.data.classificationDto.topicProbability).map(t => {
+            const [topicName, probability] = t
+            return {
+              topicName,
+              probability
+            }
+          }).sort((a, b) => b.probability - a.probability)
+
+
+          this.showProbabilityData(probabilityData)})
 
         .catch((error) =>
             // handle error
