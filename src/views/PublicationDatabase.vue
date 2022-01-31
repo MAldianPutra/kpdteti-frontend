@@ -140,12 +140,12 @@ export default {
         align: 'start',
         sortable: false,
         value: 'publicationTitle'},
-      // {text: 'Author',
-      //   align:'start',
-      //   value: "authorDto"},
-      // {text: 'Topic',
-      //   align: 'start',
-      //   value: "topicDto"},
+      {text: 'Author',
+        align:'start',
+        value: "authorName"},
+      {text: 'Topic',
+        align: 'start',
+        value: "topicName"},
       {
         text:'Action',
         value:'actions',
@@ -175,9 +175,16 @@ export default {
   async mounted() {
     axios
         .get("http://localhost:8081/kpdteti/api/publications/all")
-        .then((response) =>
+        .then((response) =>{
             // handle success
-            this.showPublication(response.data))
+            const publicationData = response.data.map(data => {
+              const {publicationTitle, topicDto, authorDto} = data
+
+              const authorName = authorDto.map(author => author.authorName).reduce((prev,cur) => prev + ', ' + cur)
+
+              return {publicationTitle, topicName: topicDto[0].topicName, authorName}
+            })
+            this.showPublication(publicationData)})
         .catch((error) =>
             // handle error
             console.log(error))

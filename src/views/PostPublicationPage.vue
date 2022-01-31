@@ -335,7 +335,7 @@ export default {
   async mounted() {
     try {
       const res = await axios
-          .get("http://localhost:8081/kpdteti/api/authors/all")
+          .get("http://localhost:8081/kpdteti/api/authors/allName")
       this.authors = res.data
     } catch (error) {
       console.log(error)

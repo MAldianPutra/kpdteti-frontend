@@ -23,9 +23,8 @@
 <!--          <a :href="profiles.publicationPath" download>-->
 <!--            Download file-->
 <!--          </a>-->
-          <v-btn
-          color="teal darken-2"
-          @click="downloadFile(profiles.publicationTitle)">Download file
+          <v-btn v-if="$store.getters.isLoggedInAsUser" text class="hidden-sm-and-down"
+          color="teal darken-2" @click="downloadFile(profiles.publicationTitle)">Download file
           </v-btn>
             <v-divider
                 inset
@@ -43,6 +42,7 @@
 import MainAppbar from "@/components/MainAppbar";
 import axios from "axios";
 import {saveAs} from 'file-saver';
+import {mapGetters} from 'vuex';
 
 export default {
   name: "PublicationProfile",
@@ -71,6 +71,9 @@ export default {
         // publicationUrl.click();
       });
     },
+  },
+  computed:{
+    ...mapGetters(["isLoggedInAsUser"]),
   },
   async mounted(){
     // this.downloadFile();

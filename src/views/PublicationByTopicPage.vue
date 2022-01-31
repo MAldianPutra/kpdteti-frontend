@@ -47,6 +47,22 @@
           </v-row>
         </v-container>
     </v-container>
+    <div class="text-center">
+      <v-container>
+        <v-row justify="center">
+          <v-col cols="8">
+            <v-container class="max-width">
+              <v-pagination
+                  v-model="computedPagination.currentpages"
+                  class="my-4"
+                  :length="computedPagination.lengthpages"
+                  @input="next"
+              ></v-pagination>
+            </v-container>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
   </v-content>
   </div>
 </template>
@@ -63,111 +79,64 @@ export default {
   },
   data: () => ({
     publications: [],
-    // topics: [],
-    // itemsPerPageArray: [10, 15, 20],
-    // search: '',
-    // filter: {},
-    // sortDesc: false,
-    // page: 1,
-    // itemsPerPage: 10,
-    // subTopics: 'name',
-    // keys: [
-    //   'Name',
-    //   'Calories',
-    //   'Fat',
-    //   'Carbs',
-    //   'Protein',
-    //   'Sodium',
-    //   'Calcium',
-    //   'Iron',
-    // ],
-    // topics: [
-    //   '1','2','3'
-    // ]
+    pagination:{
+      lengthpages:0,
+      currentpages:0
+    },
   }),
   computed: {
-    // numberOfPages () {
-    //   return Math.ceil(this.items.length / this.itemsPerPage)
-    // },
-    // filteredKeys () {
-    //   return this.keys.filter(key => key !== 'Name')
-    // },
+    computedPagination() {
+      return this.pagination
+    }
   },
   methods: {
     showPublications(data) {
       this.publications = data
     },
+    async next(page){
+      try {
+        const res = await axios
+            .get(`http://localhost:8081/kpdteti/api/topics/publications?topicId=${this.$route.params.id}&page=${page - 1}`)
+        await this.$nextTick()
+        this.publications = res.data
+        this.pagination.currentpages = page
+        // console.log(res.data)
+      }catch(error){
+        // handle error
+        console.log(error)
+      }
+    },
     // showTopics(data){
     //   this.topics = data
     // },
-    showAnotherPublications(){
-      this.$router.push({name:'publication topic', params: {id: '[topicId]'}});
-    },
-    // showPublicationProfile(){
-    //   this.$router.push({name:'publication profile', params: {id: '[publicationId]'}});
-    // }
-    //   nextPage () {
-    //     if (this.page + 1 <= this.numberOfPages) this.page += 1
-    //   },
-    //   formerPage () {
-    //     if (this.page - 1 >= 1) this.page -= 1
-    //   },
-    //   updateItemsPerPage (number) {
-    //     this.itemsPerPage = number
-    //   },
+    // showAnotherPublications(){
+    //   this.$router.push({name:'publication topic', params: {id: '[topicId]'}});
+    // },
   },
   async mounted(){
     try {
       const res = await axios
-          .get(`http://localhost:8081/kpdteti/api/topics/publications?topicId=${this.$route.params.id}`)
-              // handle success
-              this.showPublications(res.data)
-          // this.publications(res.data)
-          // console.log(res.data)
-      }catch(error) {
-              // handle error
-              console.log(error)
-        // console.log(this.$route.params.id)
-      }
-
-  // async mounted() {
-  //   let link = [
-  //     `http://localhost:8081/kpdteti/api/topics/parents?topicParentId=${this.$route.params.id}`,
-  //     `http://localhost:8081/kpdteti/api/topics/publications?topicId=${this.$route.params.id}`
-  //   ]
-  //   try {
-  //         axios.all(link.map((link) => axios.get(link)))
-  //         .then((data) => {this.showPublications(data[1].data),this.showTopics(data[0].data),console.log(data[0].data),console.log(data[1].data)}
-  //         );}
-  //     catch(error){
-  //       //         // handle error
-  //               console.log(error)
-  //       //   // console.log(this.$route.params.id)
-  //       }
-      // const res = await axios
-      //     .get(`http://localhost:8081/kpdteti/api/topics/publications?topicOrParentId=${this.$route.params.id}`)
-      //         // handle success
-      //         this.showPublications(res.data)
-      //     // this.publications(res.data)
-      //     // console.log(res.data)
-      // }catch(error) {
-      //         // handle error
-      //         console.log(error)
-      //   // console.log(this.$route.params.id)
-      // }
-      // try {
-      // const res = await axios
-      //     .get(`http://localhost:8081/kpdteti/api/topics/publications?topicOrParentId=${this.$route.params.id}`)
-      //         // handle success
-      //         this.showPublications(res.data)
-      //     // this.publications(res.data)
-      //     // console.log(res.data)
-      // }catch(error) {
-      //         // handle error
-      //         console.log(error)
-      //   // console.log(this.$route.params.id)
-      // }
-
+          .get(`http://localhost:8081/kpdteti/api/topics/publications?topicId=${this.$route.params.id}&page=0`)
+      this.publications = res.data
+      this.pagination.currentpages = 1
+      this.pagination.lengthpages = res.data[0]?.numberOfPage
+      // console.log(res.data)
+    }catch(error){
+      // handle error
+      console.log(error)
+    }
+    // try {
+    //   const res = await axios
+    //       .get(`http://localhost:8081/kpdteti/api/topics/publications?topicId=${this.$route.params.id}`)
+    //           // handle success
+    //           this.showPublications(res.data)
+    //       // this.publications(res.data)
+    //       // console.log(res.data)
+    //   }catch(error) {
+    //           // handle error
+    //           console.log(error)
+    //     // console.log(this.$route.params.id)
+    //   }
   },
 }
 </script>

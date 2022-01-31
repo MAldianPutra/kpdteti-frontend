@@ -55,6 +55,7 @@
             <v-text-field
             v-model="form.password"
             label="Password"
+            type="password"
             filled
             rounded></v-text-field>
             <v-btn

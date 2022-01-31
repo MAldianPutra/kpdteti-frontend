@@ -136,6 +136,7 @@
   .firstSection{
     background: url('../assets/jjj.png');
     box-shadow: 0px 0px 20px grey;
+    opacity:0.7;
     background-size: cover;
     height:500%;
     width: 100vw;

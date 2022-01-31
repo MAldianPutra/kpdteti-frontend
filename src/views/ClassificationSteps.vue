@@ -96,54 +96,60 @@
                   :complete="e6>2"
                   step="2">Classification</v-stepper-step>
               <v-stepper-content step="2">
+
                 <v-card
                     color="teal lighten-2"
                     class="mb-12"
                     height="100%">
-                  <v-card-title
-                  style="font-size: small"
-                  class="mb-0">Probability of Computer System Organization Topic</v-card-title>
-                  <v-card-text
-                  class="mb-0">
-                  {{publication.classificationDto.predictProbability["probability(0)"] }}</v-card-text>
-                  <v-card-title
-                      style="font-size: small"
-                  class="mb-0">Probability of Networks Topic</v-card-title>
-                  <v-card-text
-                  class="mb-0">
-                    {{publication.classificationDto.predictProbability["probability(1)"]}}</v-card-text>
-                  <v-card-title
-                      style="font-size: small">Probability of Software and Its Engineering Topic</v-card-title>
-                  <v-card-text>
-                    {{publication.classificationDto.predictProbability["probability(2)"]}}</v-card-text>
-                  <v-card-title
-                      style="font-size: small">Probability of Theory of Computation Topic</v-card-title>
-                  <v-card-text>
-                    {{publication.classificationDto.predictProbability["probability(3)"]}}</v-card-text>
-                  <v-card-title
-                      style="font-size: small">Probability of Mathematics of Computing Topic</v-card-title>
-                  <v-card-text>
-                    {{publication.classificationDto.predictProbability["probability(4)"]}}</v-card-text>
-                  <v-card-title
-                      style="font-size: small">Probability of Information System Topic</v-card-title>
-                  <v-card-text>
-                    {{publication.classificationDto.predictProbability["probability(5)"]}}</v-card-text>
-                  <v-card-title
-                      style="font-size: small">Probability of Security and Privacy Topic</v-card-title>
-                  <v-card-text>
-                    {{publication.classificationDto.predictProbability["probability(6)"]}}</v-card-text>
-                  <v-card-title
-                      style="font-size: small">Probability of Human-centered Computing Topic</v-card-title>
-                  <v-card-text>
-                    {{publication.classificationDto.predictProbability["probability(7)"]}}</v-card-text>
-                  <v-card-title
-                      style="font-size: small">Probability of Computing Methodologies Topic</v-card-title>
-                  <v-card-text>
-                    {{publication.classificationDto.predictProbability["probability(8)"]}}</v-card-text>
-                  <v-card-title
-                      style="font-size: small">Probability of Applied Computing Topic</v-card-title>
-                  <v-card-text>
-                    {{publication.classificationDto.predictProbability["probability(9)"]}}</v-card-text>
+                  <v-data-table
+                  :headers="headers"
+                  :items="items"
+                  class="elevation-1">
+                  </v-data-table>
+<!--                  <v-card-title-->
+<!--                  style="font-size: small"-->
+<!--                  class="mb-0">Probability of Computer System Organization Topic</v-card-title>-->
+<!--                  <v-card-text-->
+<!--                  class="mb-0">-->
+<!--                  {{publication.classificationDto.predictProbability["probability(0)"] }}</v-card-text>-->
+<!--                  <v-card-title-->
+<!--                      style="font-size: small"-->
+<!--                  class="mb-0">Probability of Networks Topic</v-card-title>-->
+<!--                  <v-card-text-->
+<!--                  class="mb-0">-->
+<!--                    {{publication.classificationDto.predictProbability["probability(1)"]}}</v-card-text>-->
+<!--                  <v-card-title-->
+<!--                      style="font-size: small">Probability of Software and Its Engineering Topic</v-card-title>-->
+<!--                  <v-card-text>-->
+<!--                    {{publication.classificationDto.predictProbability["probability(2)"]}}</v-card-text>-->
+<!--                  <v-card-title-->
+<!--                      style="font-size: small">Probability of Theory of Computation Topic</v-card-title>-->
+<!--                  <v-card-text>-->
+<!--                    {{publication.classificationDto.predictProbability["probability(3)"]}}</v-card-text>-->
+<!--                  <v-card-title-->
+<!--                      style="font-size: small">Probability of Mathematics of Computing Topic</v-card-title>-->
+<!--                  <v-card-text>-->
+<!--                    {{publication.classificationDto.predictProbability["probability(4)"]}}</v-card-text>-->
+<!--                  <v-card-title-->
+<!--                      style="font-size: small">Probability of Information System Topic</v-card-title>-->
+<!--                  <v-card-text>-->
+<!--                    {{publication.classificationDto.predictProbability["probability(5)"]}}</v-card-text>-->
+<!--                  <v-card-title-->
+<!--                      style="font-size: small">Probability of Security and Privacy Topic</v-card-title>-->
+<!--                  <v-card-text>-->
+<!--                    {{publication.classificationDto.predictProbability["probability(6)"]}}</v-card-text>-->
+<!--                  <v-card-title-->
+<!--                      style="font-size: small">Probability of Human-centered Computing Topic</v-card-title>-->
+<!--                  <v-card-text>-->
+<!--                    {{publication.classificationDto.predictProbability["probability(7)"]}}</v-card-text>-->
+<!--                  <v-card-title-->
+<!--                      style="font-size: small">Probability of Computing Methodologies Topic</v-card-title>-->
+<!--                  <v-card-text>-->
+<!--                    {{publication.classificationDto.predictProbability["probability(8)"]}}</v-card-text>-->
+<!--                  <v-card-title-->
+<!--                      style="font-size: small">Probability of Applied Computing Topic</v-card-title>-->
+<!--                  <v-card-text>-->
+<!--                    {{publication.classificationDto.predictProbability["probability(9)"]}}</v-card-text>-->
                 </v-card>
                 <v-btn
                     class="white--text"
@@ -251,23 +257,25 @@ import axios from "axios";
 // import { Doughnut } from 'vue-chartjs';
 export default {
   name: "ClassificationSteps",
-  // extends:Doughnut,
-  // props:[
-  //     chartdata:{
-  //   type : Object,
-  //   default: null
-  //   },
-  //   options :{
-  //   type : Object,
-  //   default: null
-  //   },
-  // ],
   components:{
     MainAppbar,
   },
 
   data:() => ({
       publication:[],
+      items:[],
+      headers:[
+        {
+          text:'Topic Name',
+          align:'start',
+          sortable:false,
+          value:'topicName',
+        },
+        {
+          text:'Probability',
+          value:'probability',
+        }
+      ],
       e6:1,
       showSteps : true,
       show:false,
@@ -287,15 +295,30 @@ export default {
     done(){
       this.$router.push(`/home`)
     },
+    showData(data){
+      this.items = data
+    },
+    showPublication(data){
+      this.publication = data
+    }
   },
   async mounted(){
-    try {
-      const response = await axios.get('http://localhost:8081/kpdteti/api/publications?publicationId=' + this.$route.params.id)
-      console.log(response.data)
-      this.publication = response.data
-    } catch (error) {
-      console.log(error)
-    }
+    axios
+        .get(`http://localhost:8081/kpdteti/api/publications?publicationId=` + this.$route.params.id)
+        .then((response) =>{
+          // handle success
+          const probabilityData = response.data.map(data => {
+            // const { classificationDto } = data
+            // const topicName = classificationDto.topicProbability.keys()
+
+            return {data}
+          })
+          this.showData(probabilityData)
+          this.showPublication(response.data)})
+
+        .catch((error) =>
+            // handle error
+            console.log(error))
   }
 }
 

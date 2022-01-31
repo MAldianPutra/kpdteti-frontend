@@ -39,6 +39,22 @@
         </v-col>
       </v-row>
     </v-container>
+    <div class="text-center">
+      <v-container>
+        <v-row justify="center">
+          <v-col cols="8">
+            <v-container class="max-width">
+              <v-pagination
+                  v-model="computedPagination.currentpages"
+                  class="my-4"
+                  :length="computedPagination.lengthpages"
+                  @input="next"
+              ></v-pagination>
+            </v-container>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
     <MainFooter></MainFooter>
   </v-content>
   </div>
@@ -58,33 +74,38 @@ export default {
   },
   data:()=>({
     authors: [],
+    pagination:{
+      lengthpages:0,
+      currentpages:0
+    },
   }),
-method:{
-    // authorProfile(){
-    //   this.$router.push({name:'author profile',params:{}})
-    // }
-  // sortAuthors(authors){
-  //   return _.orderBy(authors, 'authorName', 'asc');
-  // }
+  computed: {
+    computedPagination() {
+      return this.pagination
+    }
+  },
+methods:{
+    async next(page){
+      try {
+        const res = await axios
+            .get(`http://localhost:8081/kpdteti/api/authors/all?page=${page - 1}`)
+        await this.$nextTick()
+        this.authors = res.data
+        this.pagination.currentpages = page
+        // console.log(res.data)
+      }catch(error){
+        // handle error
+        console.log(error)
+      }
+    },
 },
-//   computed:{
-//     sortAuthors(){
-//       return this.authors
-//           .filter(author => author.authorName.toLowerCase().match(this.search.toLowerCase()))
-//           .sort((a, b) => {
-//             if (a.authorName < b.authorName)
-//               return -1;
-//             if (a.authorName > b.authorName)
-//               return 1;
-//             return 0;
-//           });
-//     },
-//   },
   async mounted() {
     try {
       const res = await axios
-          .get("http://localhost:8081/kpdteti/api/authors/all")
+          .get("http://localhost:8081/kpdteti/api/authors/all?page=0")
       this.authors = res.data
+      this.pagination.currentpages = 1
+      this.pagination.lengthpages = res.data[0]?.numberOfPage
       // console.log(res.data)
     }catch(error){
       // handle error
@@ -92,150 +113,6 @@ method:{
     }
   },
 }
-
-    // itemsPerPageArray: [10, 15, 20],
-    // search: '',
-    // filter: {},
-    // sortDesc: false,
-    // page: 1,
-    // itemsPerPage: 10,
-    // sortBy: 'name',
-    // keys: [
-    //   // 'Name',
-    //   // 'Calories',
-    //   // 'Fat',
-    //   // 'Carbs',
-    //   // 'Protein',
-    //   // 'Sodium',
-    //   // 'Calcium',
-    //   // 'Iron',
-    // ],
-    // authors: []
-    //   // {
-    //   //   name: 'Frozen Yogurt',
-    //   //   calories: 159,
-    //   //   fat: 6.0,
-    //   //   carbs: 24,
-    //   //   protein: 4.0,
-    //   //   sodium: 87,
-    //   //   calcium: '14%',
-    //   //   iron: '1%',
-    //   // },
-    //   // {
-    //   //   name: 'Ice cream sandwich',
-    //   //   calories: 237,
-    //   //   fat: 9.0,
-    //   //   carbs: 37,
-    //   //   protein: 4.3,
-    //   //   sodium: 129,
-    //   //   calcium: '8%',
-    //   //   iron: '1%',
-    //   // },
-    //   // {
-    //   //   name: 'Eclair',
-    //   //   calories: 262,
-    //   //   fat: 16.0,
-    //   //   carbs: 23,
-    //   //   protein: 6.0,
-    //   //   sodium: 337,
-    //   //   calcium: '6%',
-    //   //   iron: '7%',
-    //   // },
-    //   // {
-    //   //   name: 'Cupcake',
-    //   //   calories: 305,
-    //   //   fat: 3.7,
-    //   //   carbs: 67,
-    //   //   protein: 4.3,
-    //   //   sodium: 413,
-    //   //   calcium: '3%',
-    //   //   iron: '8%',
-    //   // },
-    //   // {
-    //   //   name: 'Gingerbread',
-    //   //   calories: 356,
-    //   //   fat: 16.0,
-    //   //   carbs: 49,
-    //   //   protein: 3.9,
-    //   //   sodium: 327,
-    //   //   calcium: '7%',
-    //   //   iron: '16%',
-    //   // },
-    //   // {
-    //   //   name: 'Jelly bean',
-    //   //   calories: 375,
-    //   //   fat: 0.0,
-    //   //   carbs: 94,
-    //   //   protein: 0.0,
-    //   //   sodium: 50,
-    //   //   calcium: '0%',
-    //   //   iron: '0%',
-    //   // },
-    //   // {
-    //   //   name: 'Lollipop',
-    //   //   calories: 392,
-    //   //   fat: 0.2,
-    //   //   carbs: 98,
-    //   //   protein: 0,
-    //   //   sodium: 38,
-    //   //   calcium: '0%',
-    //   //   iron: '2%',
-    //   // },
-    //   // {
-    //   //   name: 'Honeycomb',
-    //   //   calories: 408,
-    //   //   fat: 3.2,
-    //   //   carbs: 87,
-    //   //   protein: 6.5,
-    //   //   sodium: 562,
-    //   //   calcium: '0%',
-    //   //   iron: '45%',
-    //   // },
-    //   // {
-    //   //   name: 'Donut',
-    //   //   calories: 452,
-    //   //   fat: 25.0,
-    //   //   carbs: 51,
-    //   //   protein: 4.9,
-    //   //   sodium: 326,
-    //   //   calcium: '2%',
-    //   //   iron: '22%',
-    //   // },
-    //   // {
-    //   //   name: 'KitKat',
-    //   //   calories: 518,
-    //   //   fat: 26.0,
-    //   //   carbs: 65,
-    //   //   protein: 7,
-    //   //   sodium: 54,
-    //   //   calcium: '12%',
-    //   //   iron: '6%',
-    //   // },
-    // ]
-  // }),
-  // computed: {
-  //   numberOfPages () {
-  //     return Math.ceil(this.items.length / this.itemsPerPage)
-  //   },
-  //   filteredKeys () {
-  //     return this.keys.filter(key => key !== 'Name')
-  //   },
-  // },
-  // methods: {
-  //   nextPage () {
-  //     if (this.page + 1 <= this.numberOfPages) this.page += 1
-  //   },
-  //   formerPage () {
-  //     if (this.page - 1 >= 1) this.page -= 1
-  //   },
-  //   updateItemsPerPage (number) {
-  //     this.itemsPerPage = number
-  //   },
-    // setAuthor(data){
-    //   this.author=data
-    // }
-    // },
-  // }
 
 </script>
 

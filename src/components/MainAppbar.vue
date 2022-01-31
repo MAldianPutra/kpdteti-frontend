@@ -32,7 +32,7 @@
     <v-btn v-if="$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/classification')">
       <span style="color:rgba(36,35,36,0.89)">Classification</span>
     </v-btn>
-    <v-btn v-if="$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/database')">
+    <v-btn v-if="$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down"  @click="$router.push('/database/topics')">
       <span style="color:rgba(36,35,36,0.89)">Database</span>
     </v-btn>
     <v-btn v-if="!$store.getters.isLoggedInAsAdmin" text class="hidden-sm-and-down" @click="$router.push('/author')">
