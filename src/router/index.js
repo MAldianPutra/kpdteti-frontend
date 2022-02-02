@@ -54,11 +54,6 @@ const routes = [
         component: () => import(/* webpackChunkName: "publication profile" */'../views/PublicationProfile.vue'),
     },
     {
-        path: '/home/publication-profile/:id',
-        name: 'Publication Profile',
-        component: () => import(/* webpackChunkName: "publication profile" */'../views/PublicationProfile.vue'),
-    },
-    {
         path: '/home/publication-topic/:id',
         name: 'publication topic',
         component: () => import(/* webpackChunkName: "publication topic" */'../views/PublicationByTopicPage.vue'),
@@ -77,6 +72,11 @@ const routes = [
         path: '/register',
         name: 'register',
         component: () => import(/* webpackChunkName: "publication topic" */'../views/RegisterPage.vue'),
+    },
+    {
+        path: '/register/admin',
+        name: 'register',
+        component: () => import(/* webpackChunkName: "publication topic" */'../views/RegisterPageAdmin.vue'),
     },
     {
         path: '/database/topics',

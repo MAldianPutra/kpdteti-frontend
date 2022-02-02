@@ -66,7 +66,10 @@
         style="font-size: smaller">Don't Have Account?</p>
         <router-link
             class="mt-0 text--secondary"
-            style="font-size: smaller" to="/register">Click here to register!</router-link>
+            style="font-size: smaller" to="/register/admin">Click here to register as <strong>admin!</strong></router-link><br>
+        <router-link
+            class="mt-0 text--secondary"
+            style="font-size: smaller" to="/register">Click here to register as <strong>user!</strong></router-link>
       </v-card>
     </v-sheet>
   </div>
