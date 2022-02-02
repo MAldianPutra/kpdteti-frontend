@@ -94,14 +94,14 @@ export default {
   },
   async mounted() {
     try {
-      if (!this.$route.params.searchKey || !this.$route.params.selectType){
+      if (!this.$route.params.searchKey || !this.$route.params.selectType||!this.$route.params.page){
         const res = await axios
             .get("http://localhost:8081/kpdteti/api/publications/all")
         this.setPublications(res.data)
         console.log(res.data)
       } else{
         const res = await axios
-            .get(`http://localhost:8081/kpdteti/api/publications/search?searchKey=${this.$route.params.searchKey}&searchType=${this.$route.params.selectType}`)
+            .get(`http://localhost:8081/kpdteti/api/publications/search?searchKey=${this.$route.params.searchKey}&searchType=${this.$route.params.selectType}&page=${this.route.params.page}`)
         this.setPublications(res.data)
         console.log(res.data)
       }

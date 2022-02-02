@@ -16,13 +16,12 @@
           :key="publication.publicationId">
           <router-link
           style="text-decoration: none; color: inherit;"
-          :to="{name: 'Publication Profile',params:{id:publication.publicationId}}">
+          :to="{name: 'publication profile',params:{id:publication.publicationId}}">
           <v-card
               class="mx-auto"
               outlined
               max-width="1000"
-              elevation="4"
-              >
+              elevation="4"           >
           <v-list
           three-line>
             <v-list-item

@@ -237,7 +237,7 @@ export default {
   },
   async mounted() {
     axios
-        .get("http://localhost:8081/kpdteti/api/authors/all")
+        .get("http://localhost:8081/kpdteti/api/authors/all?page=0")
         .then((response) =>
             // handle success
             this.showAuthor(response.data))

@@ -83,6 +83,10 @@
                       :items-per-page="10"
                       class="elevation-1"
                   >
+                    <router-link
+                        style="text-decoration: none; color: inherit;"
+                        :to="{name: 'publication profile',params:{id:publication.publicationId}}">
+                    </router-link>
 <!--                    <template v-slot:[`item.topicDto`]="{ item }">-->
 <!--                      <div v-for="topic in item.topicDto" :key="topic.id">-->
 <!--                        {{ topic.topicName }}-->
@@ -173,7 +177,7 @@ export default {
   },
   async mounted() {
     axios
-        .get("http://localhost:8081/kpdteti/api/publications/all")
+        .get("http://localhost:8081/kpdteti/api/publications/all?page=0")
         .then((response) =>{
             // handle success
             const publicationData = response.data.map(data => {
