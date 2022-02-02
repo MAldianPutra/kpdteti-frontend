@@ -151,7 +151,6 @@ export default {
         value:'actions',
         sortable:false
       },
-      // {text:'',value:'action'}
     ],
 
   }),

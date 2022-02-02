@@ -298,24 +298,24 @@ export default {
       }
 
       const response = await axios.post('http://localhost:8081/kpdteti/api/xpath/publications', data)
-      console.log(response)
 
       if(response.status === 200) {
-        let formData = new FormData()
-        formData.append('file', this.publicationPDF)
+        if(this.publicationPDF != null) {
+          let formData = new FormData()
+          formData.append('file', this.publicationPDF)
 
-        const config = {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          },
-        };
-        const uploadResponse = await axios.post(`http://localhost:8081/kpdteti/api/publications/upload?id=${response.data.publicationId}`, formData, config)
-        console.log(uploadResponse)
+          const config = {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            },
+          };
 
-        if(uploadResponse.status === 200) {
-          this.$router.push(`/classification/steps/${response.data.publicationId}`);
+          await axios.post(`http://localhost:8081/kpdteti/api/publications/upload?id=${response.data.publicationId}`, formData, config)
         }
+
+        await this.$router.push(`/classification/steps/${response.data.publicationId}`);
       }
+
       } catch (error) {
         console.log(error)
       }
