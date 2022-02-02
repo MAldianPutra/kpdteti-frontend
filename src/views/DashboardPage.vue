@@ -6,8 +6,8 @@
       <section class="firstSection">
         <v-container>
           <pre class="tab1"></pre>
-          <h1>Welcome to KP-DTETI!</h1><br>
-          <h1>DTETIs Classification Publication System</h1><br>
+<!--          <h1>Welcome to KP-DTETI!</h1><br>-->
+<!--          <h1>DTETIs Classification Publication System</h1><br>-->
 <!--          <p>KP-DTETI adalah sistem klasifikasi hasil publikasi.<br>-->
 <!--            Sistem ini-->
 <!--            dapat digunakan oleh mahasiswa,dosen dan tenaga pendidik DTETI FT UGM.</p>-->
@@ -50,6 +50,7 @@
 
                 </v-row>
             </v-container>
+      <h1>Search Your Publications by Topics</h1>
           </div>
         </v-container>
       </section>
@@ -57,11 +58,11 @@
 
 
     <div id="topicSection">
-      <pre>
-      <h1>Search Your Publications by Topics</h1>
-      </pre>
+<!--      <pre>-->
+<!--      <h1>Search Your Publications by Topics</h1>-->
+<!--      </pre>-->
       <v-container
-          class="grey lighten-5 py-0 my-0">
+          class="grey lighten-5 py-0 my-0 mt-6">
         <v-row justify="center">
           <v-col
               cols="12"
@@ -136,7 +137,7 @@
   .firstSection{
     background: url('../assets/jjj.png');
     box-shadow: 0px 0px 20px grey;
-    opacity:0.7;
+    opacity:0.9;
     background-size: cover;
     height:500%;
     width: 100vw;
