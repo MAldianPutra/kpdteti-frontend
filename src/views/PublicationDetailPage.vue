@@ -17,7 +17,7 @@
           :pagination.sync="pagination"
           :loading="loading"
           item-key="publicationId"
-          :items-per-page="5"
+          :items-per-page="15"
           class="elevation-1"
           :search="search"
           @click:row="showPublicationProfile"
@@ -94,14 +94,14 @@ export default {
   },
   async mounted() {
     try {
-      if (!this.$route.params.searchKey || !this.$route.params.selectType||!this.$route.params.page){
+      if (!this.$route.params.searchKey || !this.$route.params.selectType){
         const res = await axios
             .get("http://localhost:8081/kpdteti/api/publications/all")
         this.setPublications(res.data)
         console.log(res.data)
       } else{
         const res = await axios
-            .get(`http://localhost:8081/kpdteti/api/publications/search?searchKey=${this.$route.params.searchKey}&searchType=${this.$route.params.selectType}&page=0`)
+            .get(`http://localhost:8081/kpdteti/api/publications/search?searchKey=${this.$route.params.searchKey}&searchType=${this.$route.params.selectType}`)
         this.setPublications(res.data)
         console.log(res.data)
       }
@@ -110,6 +110,7 @@ export default {
     }
   },
 }
+// ||!this.$route.params.page
 
 </script>
 <style>
