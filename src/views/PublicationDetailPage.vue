@@ -101,7 +101,7 @@ export default {
         console.log(res.data)
       } else{
         const res = await axios
-            .get(`http://localhost:8081/kpdteti/api/publications/search?searchKey=${this.$route.params.searchKey}&searchType=${this.$route.params.selectType}&page=${this.route.params.page}`)
+            .get(`http://localhost:8081/kpdteti/api/publications/search?searchKey=${this.$route.params.searchKey}&searchType=${this.$route.params.selectType}&page=0`)
         this.setPublications(res.data)
         console.log(res.data)
       }
