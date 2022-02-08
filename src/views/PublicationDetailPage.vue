@@ -53,15 +53,6 @@ export default {
   }),
 
   methods: {
-    // nextPage() {
-    //   if (this.page + 1 <= this.numberOfPages) this.page += 1
-    // },
-    // formerPage() {
-    //   if (this.page - 1 >= 1) this.page -= 1
-    // },
-    // updateItemsPerPage(number) {
-    //   this.itemsPerPage = number
-    // },
     setPublications(data) {
       this.publications = data.map(p => {
         let topicName = ''
@@ -94,14 +85,14 @@ export default {
   },
   async mounted() {
     try {
-      if (!this.$route.params.searchKey || !this.$route.params.selectType){
+      if (this.$route.params.searchKey === "all" || this.$route.params.searchKey == null){
         const res = await axios
             .get("http://localhost:8081/kpdteti/api/publications/all")
         this.setPublications(res.data)
         console.log(res.data)
       } else{
         const res = await axios
-            .get(`http://localhost:8081/kpdteti/api/publications/search?searchKey=${this.$route.params.searchKey}&searchType=${this.$route.params.selectType}`)
+            .get(`http://localhost:8081/kpdteti/api/publications/search?searchKey=${this.$route.params.searchKey}`)
         this.setPublications(res.data)
         console.log(res.data)
       }
@@ -110,7 +101,6 @@ export default {
     }
   },
 }
-// ||!this.$route.params.page
 
 </script>
 <style>

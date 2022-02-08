@@ -26,8 +26,8 @@
                       :items="items"
                       solo
                       dense
-                      label="Search Type"
-                      v-model="searchBySelect">
+                      v-model="searchType"
+                      label="Search Type">
                   </v-select>
                 </v-col>
                 <v-col
@@ -37,7 +37,7 @@
                       hide-details
                       solo
                       dense
-                      v-model="searchOnly"
+                      v-model="searchKey"
                       label="Search Publication"
                   ></v-text-field>
                 </v-col>
@@ -58,9 +58,6 @@
 
 
     <div id="topicSection">
-<!--      <pre>-->
-<!--      <h1>Search Your Publications by Topics</h1>-->
-<!--      </pre>-->
       <v-container
           class="grey lighten-5 py-0 my-0 mt-6">
         <v-row justify="center">
@@ -85,7 +82,6 @@
         </v-row>
       </v-container>
     </div>
-<!--   <h1>Ini dashboard</h1>-->
     <MainFooter></MainFooter>
   </div>
 
@@ -96,7 +92,6 @@
   import MainFooter from '@/components/MainFooter';
   // import Notification from "@/components/Notification";
   import axios from "axios";
-  // import topicData from '@/json/db.json';
 
   export default {
     name: "DashboardPage",
@@ -106,7 +101,8 @@
       // Notification
     },
     data:()=>({
-      searchOnly:'',
+      searchKey:'',
+      searchType: '',
       items: ['AUTHOR', 'TOPIC', 'TITLE'],
         // Topics: topicData,
         Topics: [],
@@ -116,8 +112,12 @@
         this.Topics = data
       },
       search(){
-        this.$router.push(`/publication/${this.searchBySelect}/${this.searchOnly}`)
-        },
+        if(this.searchKey !== "") {
+          this.$router.push(`/publication/${this.searchKey}`)
+        } else {
+          this.searchKey = "all"
+          this.$router.push(`/publication/${this.searchKey}`)
+        }},
     },
     async mounted() {
         axios

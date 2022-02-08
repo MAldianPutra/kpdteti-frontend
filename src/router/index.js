@@ -11,11 +11,6 @@ const routes = [
         component: Dashboard,
     },
     {
-        path: '/home',
-        name: 'dashboard',
-        component: Dashboard,
-    },
-    {
         path: '/classification',
         name: 'publication classification',
         component: () => import(/*webpackChunkName: "publication classification" */'../views/PostPublicationPage'),
@@ -26,17 +21,8 @@ const routes = [
       name: 'author',
       component: () => import(/* webpackChunkName: "author profile" */'../views/AuthorList.vue')
     },
-
     {
-        path: '/publication/:selectType/:searchKey',
-        name: 'publication',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "publication" */ '../views/PublicationDetailPage.vue'),
-    },
-    {
-        path: '/publication',
+        path: '/publication/:searchKey',
         name: 'publication',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
@@ -75,7 +61,7 @@ const routes = [
     },
     {
         path: '/register/admin',
-        name: 'register',
+        name: 'register admin',
         component: () => import(/* webpackChunkName: "publication topic" */'../views/RegisterPageAdmin.vue'),
     },
     {
