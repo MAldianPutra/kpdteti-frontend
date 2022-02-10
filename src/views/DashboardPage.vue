@@ -19,20 +19,8 @@
               <v-row
               justify="center">
                 <v-col
-                cols="12"
-                sm="2"
-               >
-                  <v-select
-                      :items="items"
-                      solo
-                      dense
-                      v-model="searchType"
-                      label="Search Type">
-                  </v-select>
-                </v-col>
-                <v-col
-                cols="12"
-                sm="4">
+                cols="3"
+                sm="5">
                   <v-text-field
                       hide-details
                       solo

@@ -35,15 +35,15 @@
           </v-card-text>
 
           <v-card-text class="white--text pt-0">
-            KP-DTETI is a system for helping the user to classify the publications.
+            reti is a system for DTETI publication product's repositories and also do the classification to publication into topics.
             The publications will be classified into 10 labels.
-            Not only classification, user also can see about author's profile and finding publications.
+            Not only classification, user also can see about author's profile and also download the publications.
           </v-card-text>
 
           <v-divider></v-divider>
 
           <v-card-text class="white--text">
-            {{ new Date().getFullYear() }} — <strong>KP-DTETI</strong>
+            {{ new Date().getFullYear() }} — <strong>reti</strong>
           </v-card-text>
         </v-card>
       </v-footer>

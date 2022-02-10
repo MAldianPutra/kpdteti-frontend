@@ -14,8 +14,8 @@
       <v-toolbar-title class="text-left" style="color: rgba(36,35,36,0.89)">
         <v-row class="text--secondary text-left">
           <v-col class="text--secondary text-left">
-            <p class="text-left pb-0 mb-0" >KP-DTETI</p>
-            <p class="py-0 my-0" style="font-size: 10px">Sistem Klasifikasi Publikasi DTETI</p>
+            <p class="text-left pb-0 mb-0" >RETI</p>
+            <p class="py-0 my-0" style="font-size: 10px">DTETI Publication Repositories</p>
           </v-col>
         </v-row>
       </v-toolbar-title>
@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       menus: [
-        { title: 'Home', route: '/home' },
+        { title: 'Home', route: '/' },
       ],
     };
   },

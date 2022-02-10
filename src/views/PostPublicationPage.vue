@@ -233,6 +233,7 @@ export default {
 
   computed: {
     ...mapState(['user']),
+    ...mapState(['path']),
     titleErrors() {
       const errors = []
       if (!this.$v.publicationTitle.$dirty) return errors

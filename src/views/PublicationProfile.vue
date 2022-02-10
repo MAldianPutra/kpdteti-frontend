@@ -23,9 +23,14 @@
 <!--          <a :href="profiles.publicationPath" download>-->
 <!--            Download file-->
 <!--          </a>-->
-          <v-btn v-if="$store.getters.isLoggedInAsUser" text class="hidden-sm-and-down"
-          color="teal darken-2" @click="downloadFile(profiles.publicationTitle)">Download file
-          </v-btn>
+          <v-btn
+              v-if="$store.getters.isLoggedInAsUser"
+              text class="hidden-sm-and-down"
+              color="teal darken-2"
+              @click="downloadFile(profiles.publicationTitle)"
+              :disabled="isThereAnyPath"
+          >Download file</v-btn>
+
             <v-divider
                 inset
                 width="800"></v-divider>
@@ -74,6 +79,10 @@ export default {
   },
   computed:{
     ...mapGetters(["isLoggedInAsUser"]),
+    isThereAnyPath(){
+      return(
+      this.publicationPath != " ")
+    },
   },
   async mounted(){
     // this.downloadFile();

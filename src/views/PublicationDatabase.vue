@@ -177,7 +177,7 @@ export default {
   },
   async mounted() {
     axios
-        .get("http://localhost:8081/kpdteti/api/publications/all?page=0")
+        .get("http://localhost:8081/kpdteti/api/publications/all")
         .then((response) =>{
             // handle success
             const publicationData = response.data.map(data => {

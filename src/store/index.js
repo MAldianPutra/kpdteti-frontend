@@ -22,7 +22,7 @@ export default new Vuex.Store({
     },
     DELETE_USER: (state) => {
       state.user = null
-    }
+    },
   },
   actions: {
     async login({ commit }, payload) {
@@ -52,7 +52,8 @@ export default new Vuex.Store({
     logout({commit}) {
       localStorage.removeItem('user')
       commit('DELETE_USER')
-    }
+    },
+
   },
   modules: {
   },

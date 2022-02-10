@@ -40,6 +40,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "publication profile" */'../views/PublicationProfile.vue'),
     },
     {
+        path: '/home/publication-profile/:id',
+        name: 'publication profile',
+        component: () => import(/* webpackChunkName: "publication profile" */'../views/PublicationProfile.vue'),
+    },
+    {
         path: '/home/publication-topic/:id',
         name: 'publication topic',
         component: () => import(/* webpackChunkName: "publication topic" */'../views/PublicationByTopicPage.vue'),

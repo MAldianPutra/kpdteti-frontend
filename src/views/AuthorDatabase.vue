@@ -7,20 +7,20 @@
         style="max-height: 500px">
       <v-row
           class="pl-8">
-        <v-col
-            cols="3">
-          <v-card
-              class="pl-5"
-              @click="$router.push('/database/topics')">
-            <v-avatar
-                tile>
-              <v-img
-                  src="../assets/search.png"
-                  height="40px"></v-img>
-            </v-avatar>
-            <v-card-title>Topics</v-card-title>
-          </v-card>
-        </v-col>
+<!--        <v-col-->
+<!--            cols="3">-->
+<!--          <v-card-->
+<!--              class="pl-5"-->
+<!--              @click="$router.push('/database/topics')">-->
+<!--            <v-avatar-->
+<!--                tile>-->
+<!--              <v-img-->
+<!--                  src="../assets/search.png"-->
+<!--                  height="40px"></v-img>-->
+<!--            </v-avatar>-->
+<!--            <v-card-title>Topics</v-card-title>-->
+<!--          </v-card>-->
+<!--        </v-col>-->
         <v-col
             cols="3">
           <v-card
