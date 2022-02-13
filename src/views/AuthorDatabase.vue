@@ -227,9 +227,11 @@ export default {
           authorFaculty: this.authorFaculty,
           authorUniversity:this.authorUniversity,
         }
-
         const response = await axios.post('http://localhost:8081/kpdteti/api/admin/authors', data)
         console.log(response)
+        if(response.status === 201) {
+          window.location.reload();
+        }
       }catch (error) {
         console.log(error)
       }
@@ -237,7 +239,7 @@ export default {
   },
   async mounted() {
     axios
-        .get("http://localhost:8081/kpdteti/api/authors/all?page=0")
+        .get("http://localhost:8081/kpdteti/api/authors/all")
         .then((response) =>
             // handle success
             this.showAuthor(response.data))

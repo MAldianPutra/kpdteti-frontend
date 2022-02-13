@@ -175,7 +175,7 @@ export default {
 
   methods:{
     done(){
-      this.$router.push(`/home`)
+      this.$router.push(`/`)
     },
     showProbabilityData(data){
       this.items = data
