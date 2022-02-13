@@ -20,15 +20,12 @@
              <v-list-item-title>{{profiles.otherAuthors}}</v-list-item-title>
              <v-list-item-title>{{profiles.publicationDate}}</v-list-item-title>
            </v-list>
-<!--          <a :href="profiles.publicationPath" download>-->
-<!--            Download file-->
-<!--          </a>-->
           <v-btn
               v-if="$store.getters.isLoggedInAsUser"
               text class="hidden-sm-and-down"
               color="teal darken-2"
               @click="downloadFile(profiles.publicationTitle)"
-              :disabled="isThereAnyPath"
+              :disabled="!isThereAnyPath"
           >Download file</v-btn>
 
             <v-divider
@@ -80,8 +77,7 @@ export default {
   computed:{
     ...mapGetters(["isLoggedInAsUser"]),
     isThereAnyPath(){
-      return(
-      this.publicationPath != " ")
+      return this.profiles.isFileAvailable === true;
     },
   },
   async mounted(){
