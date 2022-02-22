@@ -15,7 +15,7 @@
                 :src="require('../img/Asset1.svg')"
             ></v-img>
             <v-toolbar-title class="text-left" style="color: rgba(36,35,36,0.89)">
-              <p class="text-left text--secondary pb-0 mb-0 mt-2" >KP-DTETI</p>
+              <p class="text-left text--secondary pb-0 mb-0 mt-2" >RETI</p>
               <p class="py-0 my-0 mb-2 text--secondary" style="font-size: 10px">Sistem Klasifikasi Publikasi DTETI</p>
             </v-toolbar-title>
           </v-row>

@@ -16,7 +16,7 @@
         ></v-img>
       <v-toolbar-title class="text-left" style="color: rgba(36,35,36,0.89)">
 <!--        <v-row class="text&#45;&#45;secondary text-left">-->
-          <p class="text-left text--secondary pb-0 mb-0 mt-2" >KP-DTETI</p>
+          <p class="text-left text--secondary pb-0 mb-0 mt-2" >RETI</p>
 <!--          <v-col class="text&#45;&#45;secondary text-left">-->
             <p class="py-0 my-0 mb-2 text--secondary" style="font-size: 10px">Sistem Klasifikasi Publikasi DTETI</p>
 <!--          </v-col>-->
